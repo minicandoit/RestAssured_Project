@@ -33,7 +33,7 @@ JUnit 5 is composed of several modules from three different sub-projects.
 ### Annotations 
 `import static org.junit.jupiter.api.*`
 * `@Test` 
-* `@DisplayName`
+* `@DisplayName("Your custom name goes here)`
 * `@BeforeAll`
   * This method must be `static void`
   * Run only once before each test class
@@ -66,3 +66,50 @@ JUnit 5 is composed of several modules from three different sub-projects.
     After all is running
 ```
  
+## Hamcrest Matchers Library 
+
+It's library to make the assertions more readable , it can be used along with any unit testing framework like Junit or TestNG
+
+It's heavily used in RestAssured for assertions. 
+RestAssured dependecy already contains all hamcrest related dependency so we can just directly use the rest assured dependency to access all hamcrest stuff. 
+```xml 
+<dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>4.3.3</version>
+      <scope>test</scope>
+</dependency>
+```
+
+If you wanted to hamcrest outside context of RestAssured you can add dependency separately 
+```xml
+<dependency>
+    <groupId>org.hamcrest</groupId>
+    <artifactId>hamcrest</artifactId>
+    <version>2.2</version>
+</dependency>
+```
+
+### Hamcrest assertions examples :
+
+Static imports need to be added 
+```java
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+```
+
+Hamcrest Assertion make test readable 
+for example if you wanted to check if 5+5 is 10 
+```java
+    @Test
+    public void simpleTest1(){
+        assertThat(5+5, is(10) ) ;
+        assertThat(5+5, equalTo(10) );
+    }
+```
+
+`is(10)` and `equalTo(10)` are 2 examples of Hamcrest Matchers available from vast varity of human readable Matchers you can find from Hamcrest Library
+
+Here is the [link for java doc with examples](http://hamcrest.org/JavaHamcrest/javadoc/2.2/org/hamcrest/Matchers.html#is-org.hamcrest.Matcher) on how it works 
+
+
