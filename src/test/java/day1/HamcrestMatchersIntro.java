@@ -4,6 +4,9 @@ package day1;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -60,9 +63,29 @@ public class HamcrestMatchersIntro {
         assertThat(msg, containsString("learning"));
         assertThat(msg, containsStringIgnoringCase("LEARNING"));
 
+        String str = "   " ;
+        // check if above str is blank
+        assertThat(str, blankString() );
+        // check if trimmed str is empty String
+        assertThat(str.trim()  , emptyString()  );
 
+    }
 
+    @DisplayName("Hamcrest Support for Collection")
+    @Test
+    public void testCollection(){
 
+        List<Integer> lst = Arrays.asList(1,4,7,3,7,44,88,99,44) ;
+
+        // checking the side of this list
+        assertThat(lst, hasSize(9) );
+        // check if this list hasItem 7
+        assertThat(lst, hasItem(7) );
+        // check if this list hasItems 7,99,88
+        assertThat(lst, hasItems(7,99,88) );
+
+        // check if every item in this list is greaterThan 0
+        assertThat(lst, everyItem( greaterThan(0) ) );
 
 
 
