@@ -53,5 +53,23 @@ public class RestAssured_Intro {
 
     }
 
+    @DisplayName("Testing GET /api/spartans/{id} Endpoint")
+    @Test
+    public void testSingleSpartan(){
+        // Send request to GET http://18.235.32.166:8000/api/spartans/16
+        // Save the response and print out whole response
+        Response response =
+                get("http://18.235.32.166:8000/api/spartans/16")
+                        .prettyPeek();
+
+        assertThat( response.statusCode(),  is(equalTo(200)) );
+        assertThat( response.contentType(), is("application/json") );
+        assertThat( response.header("Connection")  , equalTo("keep-alive")  );
+
+
+
+
+    }
+
 
 }
