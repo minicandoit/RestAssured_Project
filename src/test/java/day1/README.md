@@ -270,3 +270,34 @@ System.out.println("response.getContentType() = " + response.getContentType());
 // getting body as String
 System.out.println("response.asString() = " + response.asString());
 ```
+
+### Setting up baseURI and basePath 
+One Application usually has one base URI and entry point for the API endpoints 
+
+It's better to set this up at RestAssured level to reuse in all requests to avoid duplicate
+
+`baseURI` , `basePath`  optionally `port` static fields of RestAssured class is exactly for this purpose. 
+
+You can set it up using 
+```java
+ RestAssured.baseURI     = "http://Your_EC2_IP:8000"  ;
+ //RestAssured.port = 8000 ; Optionally (remove :8000 from above line if you do this)
+ RestAssured.basePath    = "/api" ;
+```
+This will simplify your request 
+
+from `get("http://Your_EC2_IP:8000/api/hello")`
+
+to  just `get("/hello")`  NEAT!!
+
+Now this static field value should be set only one time, `@beforeAll` method is perfect place to set this up 
+
+One you set it up , It's better to clean it up after test class finish running 
+
+You can use `reset()` method of RestAssured class in `@afterAll` method
+
+Check out our test utility class we added [here](../test_util/SpartanNoAuthBaseTest.java)
+
+Now we can just extend this class whenever we have to write any test for Spartan with no auth app. 
+
+Check out the example usage of this [here](./SpartanNoAuthTest.java)
