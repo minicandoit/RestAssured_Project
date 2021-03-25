@@ -105,7 +105,7 @@ RestAssured dependecy already contains all hamcrest related dependency so we can
 </dependency>
 ```
 
-If you wanted to hamcrest outside context of RestAssured you can add dependency separately 
+>If you wanted to hamcrest outside context of RestAssured you can add dependency separately 
 ```xml
 <dependency>
     <groupId>org.hamcrest</groupId>
@@ -136,4 +136,64 @@ for example if you wanted to check if 5+5 is 10
 
 Here is the [link for java doc with examples](http://hamcrest.org/JavaHamcrest/javadoc/2.2/org/hamcrest/Matchers.html#is-org.hamcrest.Matcher) on how it works 
 
+Examples we have tried.
+* Nunber Related 
+```java
+assertThat(5+5, is(10) ) ;
+assertThat(5+5, equalTo(10) );
+assertThat(5+5 , is( equalTo(10) ) );
+
+// negative assertion  5+5 is not 11
+assertThat(5+5, not(11) );
+assertThat(5+5, is( not(11) )   );
+assertThat(5+5, is(not(equalTo(11))));
+//        greaterThan()
+//        lessThan()
+//        greaterThanOrEqualTo()
+//        lessThanOrEqualTo()
+assertThat(5+5, is( greaterThan(9))  );
+assertThat(5+5, is( lessThan(19))  );
+```
+
+* String related 
+```java
+String msg = "B21 is learning Hamcrest" ;
+
+// checking for equality is same as numbers above
+assertThat(msg , is("B21 is learning Hamcrest") );
+assertThat(msg , equalTo("B21 is learning Hamcrest") );
+assertThat(msg , is(equalTo("B21 is learning Hamcrest")) );
+
+// check if this msg start with B21
+assertThat(msg, startsWith("B21"));
+// now do it in case insensitive manner
+assertThat(msg, startsWithIgnoringCase("b21") );
+// check if the msg end with rest
+assertThat(msg, endsWith("rest") );
+
+// check if msg contains String learning
+assertThat(msg, containsString("learning"));
+assertThat(msg, containsStringIgnoringCase("LEARNING"));
+
+String str = "   " ;
+// check if above str is blank
+assertThat(str, blankString() );
+// check if trimmed str is empty String
+assertThat(str.trim()  , emptyString()  );
+```
+
+* Collection Related 
+```java
+List<Integer> lst = Arrays.asList(1,4,7,3,7,44,88,99,44) ;
+
+// checking the side of this list
+assertThat(lst, hasSize(9) );
+// check if this list hasItem 7
+assertThat(lst, hasItem(7) );
+// check if this list hasItems 7,99,88
+assertThat(lst, hasItems(7,99,88) );
+
+// check if every item in this list is greaterThan 0
+assertThat(lst, everyItem( greaterThan(0) ) );
+```
 
