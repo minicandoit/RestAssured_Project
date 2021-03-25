@@ -147,10 +147,10 @@ assertThat(5+5 , is( equalTo(10) ) );
 assertThat(5+5, not(11) );
 assertThat(5+5, is( not(11) )   );
 assertThat(5+5, is(not(equalTo(11))));
-//        greaterThan()
-//        lessThan()
-//        greaterThanOrEqualTo()
-//        lessThanOrEqualTo()
+//greaterThan()
+//lessThan()
+//greaterThanOrEqualTo()
+//lessThanOrEqualTo()
 assertThat(5+5, is( greaterThan(9))  );
 assertThat(5+5, is( lessThan(19))  );
 ```
@@ -244,13 +244,10 @@ System.out.println("response.getStatusCode() = "
                 + response.getStatusCode());
 
 // getting specific header
-System.out.println("response.getHeader(\"Content-Type\") = " +
-                        response.getHeader("Content-Type")    );
+System.out.println("response.getHeader(\"Content-Type\") = " + response.getHeader("Content-Type")    );
 // getting content type header using ready method
-System.out.println("response.contentType() = " +
-                         response.contentType() );
-System.out.println("response.getContentType() = " +
-                         response.getContentType());
+System.out.println("response.contentType() = " + response.contentType() );
+System.out.println("response.getContentType() = " + response.getContentType());
 // getting body as String
 System.out.println("response.asString() = " + response.asString());
 ```
