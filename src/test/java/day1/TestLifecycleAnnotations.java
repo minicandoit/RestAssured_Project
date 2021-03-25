@@ -40,3 +40,14 @@ public class TestLifecycleAnnotations {
 
 
 }
+/*
+This is the output of above Test class
+    Before all is running
+    Before Each is running
+    Test 1 is running
+    After Each is running
+    Before Each is running
+    Test 2 is running
+    After Each is running
+    After all is running
+ */
