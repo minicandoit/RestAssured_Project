@@ -33,10 +33,13 @@ public class TestLifecycleAnnotations {
         System.out.println("Test 1 is running");
     }
 
+    @Disabled
     @Test
     public void test2(){
         System.out.println("Test 2 is running");
     }
+
+    // ignoring certain test using @Disabled annotation
 
 
 }

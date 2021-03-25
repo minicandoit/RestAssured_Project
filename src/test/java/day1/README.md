@@ -52,6 +52,8 @@ JUnit 5 is composed of several modules from three different sub-projects.
 * `@AfterEach`
     - This is a void method 
     - Run after each and every test 
+* `@Disabled` 
+    - for temporarily ignore the test
 
 ```
     Before all is running
