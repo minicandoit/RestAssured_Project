@@ -13,7 +13,10 @@ public class HamcrestMatchersIntro {
     public void simpleTest1(){
 
         // assert 10  equal to 5+5
-        assertThat(10, is(5 + 5) ) ;
+        // this is the syntax for hamcrest way of assertion
+        // assertThat( some actual value , some matcher that describe what you are trying to do)
+        assertThat(5+5, is(10) ) ;
+        assertThat(5+5, equalTo(10) );
 
 
     }
