@@ -215,3 +215,42 @@ import static io.restassured.RestAssured.* ;
 import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.* ;
 ```
+
+### Sending Request & Saving Response 
+Nearly all fields and methods of the class `RestAssured` are static, so static import will give us access to all fields and methods directly. 
+
+Sending a get request and saving the response : 
+
+
+
+```java
+// get method is coming from RestAssured class
+// type Response is coming from  io.restassured.response.Response;
+// so first step import 
+Response response = get("Your request URL here") ;
+```
+
+> Many methods available in Response objects to extract information out of the object
+
+* `statusCode()` or `getStatusCode()`
+* `getHeader("header name")` for getting any header
+* `getContentType()` or `contentType()` for specifically getting contentType header
+* `asString()` to get the response body as String 
+  * there are other ways do same thing 
+```java
+System.out.println("response.statusCode() = " 
+                + response.statusCode() );
+System.out.println("response.getStatusCode() = " 
+                + response.getStatusCode());
+
+// getting specific header
+System.out.println("response.getHeader(\"Content-Type\") = " +
+                        response.getHeader("Content-Type")    );
+// getting content type header using ready method
+System.out.println("response.contentType() = " +
+                         response.contentType() );
+System.out.println("response.getContentType() = " +
+                         response.getContentType());
+// getting body as String
+System.out.println("response.asString() = " + response.asString());
+```
