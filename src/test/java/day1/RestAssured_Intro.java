@@ -2,7 +2,7 @@ package day1;
 
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
-
+import static org.hamcrest.MatcherAssert.assertThat;
 import static io.restassured.RestAssured.* ;
 import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.* ;
@@ -20,11 +20,27 @@ public class RestAssured_Intro {
        // extracting information from Response object
         // getting status code
         System.out.println("response.statusCode() = " + response.statusCode() );
+        System.out.println("response.getStatusCode() = " + response.getStatusCode());
+
         // getting specific header
         System.out.println("response.getHeader(\"Content-Type\") = "
                             + response.getHeader("Content-Type"));
+        // getting content type header using ready method
+        System.out.println("response.contentType() = " + response.contentType());
+        System.out.println("response.getContentType() = " + response.getContentType());
+
+
         // getting body as String
         System.out.println("response.asString() = " + response.asString());
+
+        assertThat( response.statusCode() , is(200)  );
+        assertThat( response.contentType() , is("text/plain;charset=UTF-8") );
+        assertThat( response.contentType() ,startsWith("text/plain")  );
+        assertThat( response.asString() , is("Hello from Sparta")   );
+
+
+
+
     }
 
 
