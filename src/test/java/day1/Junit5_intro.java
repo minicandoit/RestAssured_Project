@@ -27,3 +27,5 @@ public class Junit5_intro {
 //        assertTrue(name.startsWith("A"));
     }
 }
+//Test Lifecycle annotations
+// @BeforeAll @AfterAll @BeforeEach @AfterEach
