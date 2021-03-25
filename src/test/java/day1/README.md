@@ -233,10 +233,29 @@ Response response = get("Your request URL here") ;
 > Many methods available in Response objects to extract information out of the object
 
 * `statusCode()` or `getStatusCode()`
-* `getHeader("header name")` for getting any header
+* `getHeader("header name")` or `header("Header name")` for getting any header
 * `getContentType()` or `contentType()` for specifically getting contentType header
 * `asString()` to get the response body as String 
   * there are other ways do same thing 
+* `prettyPrint()` 
+  * print out the body with proper indentation if required and return Sting
+* `prettyPeek()` 
+  * print out the body with proper indentation if required and return same Response Object 
+* `path("the path to get json field | xml node )`
+   ```json
+    {
+        "id": 16,
+        "name": "Wonder Woman",
+        "gender": "Female",
+        "phone": 9234567890
+    }
+    ```
+  * `response.path("id")` will return 16
+  * `response.path("name")` will return Wonder Woman
+  *  and so on
+
+
+
 ```java
 System.out.println("response.statusCode() = " 
                 + response.statusCode() );
