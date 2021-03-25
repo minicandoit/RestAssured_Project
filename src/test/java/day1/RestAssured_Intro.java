@@ -65,10 +65,14 @@ public class RestAssured_Intro {
         assertThat( response.statusCode(),  is(equalTo(200)) );
         assertThat( response.contentType(), is("application/json") );
         assertThat( response.header("Connection")  , equalTo("keep-alive")  );
-
-
-
-
+        // you can use this to compare pretty format and regular format
+//        System.out.println(  response.asString()  );
+        // getting the field value of Json Body
+        // path method or (jsonPath method we will see later)
+        System.out.println("response.path(\"id\") = " + response.path("id"));
+        System.out.println("response.path(\"name\") = " + response.path("name"));
+        System.out.println("response.path(\"gender\") = " + response.path("gender"));
+        System.out.println("response.path(\"phone\") = " + response.path("phone"));
     }
 
 
