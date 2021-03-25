@@ -23,3 +23,44 @@ JUnit 5 is composed of several modules from three different sub-projects.
     <version>5.7.1</version>
 </dependency>
 ```
+
+### Assertions 
+* assertEquals(actual , expected)
+* assertTrue( some boolean )
+* and so on...
+
+
+### Annotations 
+`import static org.junit.jupiter.api.*`
+* `@Test` 
+* `@DisplayName`
+* `@BeforeAll`
+  * This method must be `static void`
+  * Run only once before each test class
+   ```java
+    @BeforeAll
+    public static void init(){
+        System.out.println("Before all is running");
+    }
+    ```
+* `@AfterAll`
+    - This must be static void as well 
+    - Run only once after all test
+* `@BeforeEach`
+    - This is a void method 
+    - Run before each and every test 
+* `@AfterEach`
+    - This is a void method 
+    - Run after each and every test 
+
+```
+    Before all is running
+    Before Each is running
+    Test 1 is running
+    After Each is running
+    Before Each is running
+    Test 2 is running
+    After Each is running
+    After all is running
+```
+ 
