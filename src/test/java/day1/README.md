@@ -197,3 +197,21 @@ assertThat(lst, hasItems(7,99,88) );
 assertThat(lst, everyItem( greaterThan(0) ) );
 ```
 
+## RestAssured Intro 
+
+Dependency for Java RestAssured library
+```xml 
+<dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>4.3.3</version>
+      <scope>test</scope>
+</dependency>
+```
+
+Add below 3 static imports for all RestAssured related classes. 
+```java
+import static io.restassured.RestAssured.* ;
+import static io.restassured.matcher.RestAssuredMatchers.*;
+import static org.hamcrest.Matchers.* ;
+```
