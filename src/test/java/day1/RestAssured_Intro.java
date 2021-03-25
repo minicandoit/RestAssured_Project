@@ -25,9 +25,15 @@ public class RestAssured_Intro {
         // getting specific header
         System.out.println("response.getHeader(\"Content-Type\") = "
                             + response.getHeader("Content-Type"));
+        System.out.println("response.header(\"Date\") = " + response.header("Date"));
+
         // getting content type header using ready method
         System.out.println("response.contentType() = " + response.contentType());
         System.out.println("response.getContentType() = " + response.getContentType());
+
+        // getting the time spent for execution
+        System.out.println("response.time() = " + response.time());
+        System.out.println("response.getTime() = " + response.getTime());
 
 
         // getting body as String
@@ -38,8 +44,12 @@ public class RestAssured_Intro {
         assertThat( response.contentType() ,startsWith("text/plain")  );
         assertThat( response.asString() , is("Hello from Sparta")   );
 
+        // printing the result
+        // prettyPrint()  -->> print and return String
+        // prettyPeek()   -->> print and return same Response Object
 
-
+        response.prettyPrint() ;
+        response.prettyPeek() ;
 
     }
 
