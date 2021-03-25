@@ -8,6 +8,8 @@ public abstract class SpartanNoAuthBaseTest {
 
     @BeforeAll
     public static void init(){
+        // as a homework , put these information
+        // in configurations.properties file
         // this will set the part of URL at RestAssured
         RestAssured.baseURI     = "http://18.235.32.166:8000"  ;
 //        RestAssured.port = 8000 ;
