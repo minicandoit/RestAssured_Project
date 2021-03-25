@@ -73,6 +73,16 @@ public class RestAssured_Intro {
         System.out.println("response.path(\"name\") = " + response.path("name"));
         System.out.println("response.path(\"gender\") = " + response.path("gender"));
         System.out.println("response.path(\"phone\") = " + response.path("phone"));
+
+        // save id and name into specific data type
+        int     myId    = response.path("id") ;
+        String myName   = response.path("name") ;
+        long  myPhone   =  response.path("phone") ;
+        System.out.println("myId = " + myId);
+        System.out.println("myName = " + myName);
+        System.out.println("myPhone = " + myPhone);
+        // assert theses value according to what you print using hamcrest matchers
+
     }
 
 
