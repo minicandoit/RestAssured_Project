@@ -24,6 +24,7 @@ public class BreakingBad_Test {
         reset();
     }
 
+    @DisplayName("GET /characters with name query param")
     @Test
     public void testFilterCharacterName(){
 
@@ -42,6 +43,28 @@ public class BreakingBad_Test {
                 ;
 
     }
+
+    @DisplayName("Test GET /characters/{char_id}")
+    @Test
+    public void test1Character(){
+
+        given()
+                .pathParam("char_id" , 1 )
+                .log().uri().
+        when()
+                .get("/characters/{char_id}").
+        then()
+                .log().all()
+                .statusCode(200)
+                .header("Content-Type","application/json; charset=utf-8")
+                .contentType("application/json; charset=utf-8")
+        ;
+
+
+    }
+
+
+
 
 
 
