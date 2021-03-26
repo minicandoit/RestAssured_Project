@@ -49,11 +49,17 @@ public class SpartanTest_PathVariable extends SpartanNoAuthBaseTest {
                 given()
                     .log().all()
                     .accept("application/json")
-                    .pathParam("id",1611).
+                    .pathParam("id",16).
                 when()
                     .get("/spartans/{id}")
                     .prettyPeek();
                 ;
+
+        assertThat(response.statusCode() , equalTo(200) );
+        assertThat(response.contentType() , is("application/json"));
+        assertThat(response.path("name") , is("Wonder Woman")     );
+
+
 
 
     }
