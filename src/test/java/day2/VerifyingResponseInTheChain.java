@@ -18,6 +18,24 @@ public class VerifyingResponseInTheChain extends SpartanNoAuthBaseTest {
     public void testOneSpartanInOneShot(){
 
 
+        given()
+                .log().all() // this will log the request
+                .pathParam("id",16).
+        when()
+                .get("/spartans/{id}").
+        then()
+                .log().all() // this will log the response
+                .statusCode(200)
+                .header("Content-Type", is("application/json") )
+                .contentType("application/json")
+                .body("id", equalTo(16) )
+                .body("name" , is("Wonder Woman") )
+                .body("gender" , is("Female") )
+                .body("phone" , equalTo(9234567890L))
+
+        ;
+
+
     }
 
 }
