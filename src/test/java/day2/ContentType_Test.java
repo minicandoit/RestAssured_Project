@@ -1,5 +1,6 @@
 package day2;
 
+import io.restassured.http.ContentType;
 import test_util.SpartanNoAuthBaseTest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -15,17 +16,39 @@ public class ContentType_Test extends SpartanNoAuthBaseTest {
 
     @DisplayName("GET /hello")
     @Test
-    public void testHelloConetentType(){
+    public void testHelloContentType(){
+
+        when()
+                .get("/hello").
+        then()
+                .contentType(ContentType.TEXT)
+                .body(  is("Hello from Sparta") )
+        ;
 
     }
 
     @DisplayName("GET /spartans in json")
     @Test
-    public void testSpartansJsonConetentType(){
+    public void testSpartansJsonContentType(){
+
+        given()
+                .accept( ContentType.JSON ). // ASKING JSON RESULT FROM THE SERVER
+        when()
+                .get("/spartans").
+        then()
+                .contentType( ContentType.JSON ) // VERIFYING THE RESPONSE BODY IS JSON
+        ;
 
     }
     @DisplayName("GET /spartans in xml")
-    public void testSpartansXmlConetentType(){
-
+    @Test
+    public void testSpartansXmlContentType(){
+        given()
+                .accept( ContentType.XML ). // ASKING JSON RESULT FROM THE SERVER
+                when()
+        .get("/spartans").
+                then()
+                .contentType( ContentType.XML ) // VERIFYING THE RESPONSE BODY IS JSON
+        ;
     }
 }
