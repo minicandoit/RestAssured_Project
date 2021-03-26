@@ -24,6 +24,9 @@ then()      -----> ValidatableResponse
     .log
 
 ```
+
+### Providing Path Parameters
+
 Previously we have sent a get request to 
 `GET /spartans/16` to get the data with spartan_id of 16. the number 16 here in rest api term is `path parameter|variable`
 
@@ -58,6 +61,32 @@ when()
     .prettyPeek() ; //return same response object after printing ,optional 
 ```
 
+### Logging the Request 
+You can log each and every part of the request in the console by adding log level in `given` part of the request. 
+
+
+```java
+given()
+        .log().all()
+//      .log().uri()  // just for the request url
+//      .log().body()   // for logging request body
+//      .log().params() // logging only request parameters
+//      .log().method() // just log the http method
+//      .log().ifValidationFails() // only log the request if validation in then section has failed
+        .accept("application/json")
+        .pathParam("id",16).
+when()
+        .get("/spartans/{id}").
+then()
+//      .log().all() // this will log the response
+//      .log().body()
+//      .log().ifValidationFails()
+//      .log().status()
+//      .log().headers()
+//      .log().ifError() // anything not 2xx status is seen as error for this method
+//                .log().ifStatusCodeIsEqualTo(200)
+;
+```
 
 
 

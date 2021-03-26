@@ -1,6 +1,7 @@
 package day2;
 
 
+import io.restassured.http.ContentType;
 import test_util.SpartanNoAuthBaseTest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -19,12 +20,19 @@ public class VerifyingResponseInTheChain extends SpartanNoAuthBaseTest {
 
 
         given()
-                .log().all() // this will log the request
+//                .log().all()
+//                .log().ifValidationFails() // this will log the request
                 .pathParam("id",16).
         when()
                 .get("/spartans/{id}").
         then()
-                .log().all() // this will log the response
+//                .log().all() // this will log the response
+//                .log().body()
+//                .log().ifValidationFails()
+//                .log().status()
+//                .log().headers()
+//                .log().ifError() // anything not 2xx status is seen as error for this method
+//                .log().ifStatusCodeIsEqualTo(200)
                 .statusCode(200)
                 .header("Content-Type", is("application/json") )
                 .contentType("application/json")
