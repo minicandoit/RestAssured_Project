@@ -20,19 +20,11 @@ public class VerifyingResponseInTheChain extends SpartanNoAuthBaseTest {
 
 
         given()
-//                .log().all()
-//                .log().ifValidationFails() // this will log the request
+                .log().all()
                 .pathParam("id",16).
         when()
                 .get("/spartans/{id}").
         then()
-//                .log().all() // this will log the response
-//                .log().body()
-//                .log().ifValidationFails()
-//                .log().status()
-//                .log().headers()
-//                .log().ifError() // anything not 2xx status is seen as error for this method
-//                .log().ifStatusCodeIsEqualTo(200)
                 .statusCode(200)
                 .header("Content-Type", is("application/json") )
                 .contentType("application/json")
@@ -45,5 +37,33 @@ public class VerifyingResponseInTheChain extends SpartanNoAuthBaseTest {
 
 
     }
+
+    @DisplayName("All different Logging Options")
+    @Test
+    public void testOneSpartanLogRequestAndResponse(){
+
+        given()
+                .log().all()
+        //      .log().uri()  // just for the request url
+        //      .log().body()   // for logging request body
+        //      .log().params() // logging only request parameters
+        //      .log().method() // just log the http method
+        //      .log().ifValidationFails() // only log the request if validation in then section has failed
+                .pathParam("id",16).
+        when()
+                .get("/spartans/{id}").
+                then()
+//                .log().all() // this will log the response
+//                .log().body()
+//                .log().ifValidationFails()
+//                .log().status()
+//                .log().headers()
+//                .log().ifError() // anything not 2xx status is seen as error for this method
+//                .log().ifStatusCodeIsEqualTo(200)
+                .statusCode(200) ;
+
+    }
+
+
 
 }
