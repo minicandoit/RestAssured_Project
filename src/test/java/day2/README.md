@@ -89,4 +89,43 @@ then()
 ```
 
 
+### Providing Query Parameters in request
 
+In Spartan App `GET /api/spartans/search` endpoint , 
+It accept 2 query params `nameContains` and `gender` for filtering results
+
+Your entire url will become as displayed below example 
+```
+http://YourIP:8000/api/spartans/search?nameContains=Mustafa&gender=Male
+```
+
+RestAssured provide easy way of providing query parameters in `given` section of the chain using `queryparam` method. 
+You can provide the key value pair to the method and RestAssured will take care of appending it to your url in correct format. 
+
+
+```java
+given()
+        .log().all()
+        .queryParam("nameContains", "Mustafa")
+        .queryParam("gender","Male").
+when()
+        .get("/spartans/search")
+        .prettyPeek();
+```
+
+Here is the example for **Breaking Bad** API. 
+```java
+        given()
+                .log().uri()
+                .queryParam("name", "Walter").
+        when()
+                .get("/characters").
+        then()
+//                .assertThat() // this is coming from restassured, it's just for readability
+                .log().all()
+                //and() // this is just for readability
+                .statusCode(200)
+                .header("Content-Type","application/json; charset=utf-8")
+                .contentType("application/json; charset=utf-8")
+                ;
+```
