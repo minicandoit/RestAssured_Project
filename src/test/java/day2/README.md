@@ -2,7 +2,7 @@
 
 The Strength of RestAssured is method chaining to make all part of providing additional information before sending request , sending the request and verifying the response on one shot in BDD style of method chaining as below 
 
-The Structure of RestAssured Method Chaining
+# The Structure of RestAssured Method Chaining**
 ```
 given() ....   --> RequestSpecification 
      .header  accept() contentType()
@@ -25,7 +25,7 @@ then()      -----> ValidatableResponse
 
 ```
 
-### Providing Path Parameters
+## Providing Path Parameters
 
 Previously we have sent a get request to 
 `GET /spartans/16` to get the data with spartan_id of 16. the number 16 here in rest api term is `path parameter|variable`
@@ -61,7 +61,25 @@ when()
     .prettyPeek() ; //return same response object after printing ,optional 
 ```
 
-### Logging the Request 
+Here is the example of `Path Variable` in Breaking Bad API 
+```java
+ given()
+            .pathParam("char_id" , 1 )
+            .log().uri().
+    when()
+            .get("/characters/{char_id}").
+    then()
+            .log().all()
+            .statusCode(200)
+            .header("Content-Type","application/json; charset=utf-8")
+            .contentType("application/json; charset=utf-8")
+    ;
+
+```
+
+
+
+## Logging the Request 
 You can log each and every part of the request in the console by adding log level in `given` part of the request. 
 
 
@@ -89,7 +107,7 @@ then()
 ```
 
 
-### Providing Query Parameters in request
+## Providing Query Parameters in request
 
 In Spartan App `GET /api/spartans/search` endpoint , 
 It accept 2 query params `nameContains` and `gender` for filtering results
@@ -100,6 +118,7 @@ http://YourIP:8000/api/spartans/search?nameContains=Mustafa&gender=Male
 ```
 
 RestAssured provide easy way of providing query parameters in `given` section of the chain using `queryparam` method. 
+
 You can provide the key value pair to the method and RestAssured will take care of appending it to your url in correct format. 
 
 
@@ -129,3 +148,25 @@ Here is the example for **Breaking Bad** API.
                 .contentType("application/json; charset=utf-8")
                 ;
 ```
+
+
+### `Content Type`  : specify what kind of data
+
+It can show up in the request header
+`accept`          : what kind of response type you expect from the server
+`Content-Type`    : what kind of data you are sending to the server
+
+It can also show up in the request
+`Content-Type`   : to specify what kind of data it is in the response,
+
+Since it's such a common term in API, RestAssured has strong support for easily getting all kind of different Content-Type
+
+using `ContentType` Enum
+```java
+ContentType.JSON
+ContentType.XML
+ContentType.HTML
+ContentType.URLENC
+```
+[Here is the example](ContentType_Test.java) of How it can make your method chain more readable and less error prone
+
