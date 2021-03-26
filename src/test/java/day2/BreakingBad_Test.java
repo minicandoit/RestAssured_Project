@@ -63,6 +63,23 @@ public class BreakingBad_Test {
 
     }
 
+    // /episodes/60
+    @DisplayName("Test GET /episodes/{episode_id}")
+    @Test
+    public void test1Episode(){
+
+            given()
+                    .pathParam("episode_id", 60)
+                    .log().all().
+            when()
+                    .get("/episodes/{episode_id}").
+            then()
+                    .log().all()
+                    .statusCode(200)
+                    .contentType( ContentType.JSON ) ;
+
+    }
+
 
 
 
