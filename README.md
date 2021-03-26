@@ -12,3 +12,5 @@ Here is the [Java doc for full list of matchers](http://hamcrest.org/JavaHamcres
 
 
 ## [Day 1 Note](src/test/java/day1/README.md)
+
+## [Day 2 Note](src/test/java/day2/README.md)
