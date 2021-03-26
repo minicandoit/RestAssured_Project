@@ -12,7 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static io.restassured.RestAssured.* ;
 import static org.hamcrest.Matchers.* ;
 
-public class VerifyingResponseInTheChain extends SpartanNoAuthBaseTest {
+public class VerifyingResponseInTheChain_Test extends SpartanNoAuthBaseTest {
 
     @DisplayName("Verifying the GET /spartans/{id} response directly in the chain")
     @Test
