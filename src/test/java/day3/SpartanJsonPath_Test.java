@@ -131,6 +131,13 @@ public class SpartanJsonPath_Test extends SpartanNoAuthBaseTest{
                         .get("/spartans/search")
                         .prettyPeek()
                         .jsonPath();
+        //  save all the ids into a list
+        System.out.println("jp.getList(\"content.id\") = "
+                        + jp.getList("content.id"));
+        System.out.println("jp.getList(\"content.name\") = "
+                        + jp.getList("content.name"));
+        System.out.println("jp.getList(\"content.phone\") = "
+                        + jp.getList("content.phone"));
 
     }
 
