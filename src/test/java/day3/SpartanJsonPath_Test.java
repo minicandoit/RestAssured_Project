@@ -109,6 +109,12 @@ public class SpartanJsonPath_Test extends SpartanNoAuthBaseTest{
                 + jp.getString("content[1].name"));
 
 
+        // store first jsonObject into a map
+        Map<String, Object> firstJsonInMap =
+                jp.getMap("content[0]") ;
+        System.out.println("firstJsonInMap = " + firstJsonInMap);
+
+
     }
 
 
