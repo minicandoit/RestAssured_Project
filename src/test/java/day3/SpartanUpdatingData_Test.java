@@ -64,5 +64,15 @@ public class SpartanUpdatingData_Test extends SpartanNoAuthBaseTest {
 
     }
 
+    @DisplayName("PATCH /spartans/{id} body as String")
+    @Test
+    public void testPartialUpdateDataWithString(){
+
+
+
+    }
+
+
+
 
 }
