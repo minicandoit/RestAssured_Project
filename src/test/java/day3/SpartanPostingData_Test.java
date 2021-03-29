@@ -1,4 +1,5 @@
 package day3;
+import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import test_util.SpartanNoAuthBaseTest;
 import io.restassured.RestAssured;
@@ -20,12 +21,45 @@ public class SpartanPostingData_Test extends SpartanNoAuthBaseTest{
     @Test
     public void testPostDataWithStringBody(){
 
+        /*
+           {
+                "name" : "Abigale",
+                "gender" : "Female",
+                "phone" : 1800233232
+            }
+         */
+        String postStrBody = "{\n" +
+                "                \"name\" : \"Abigale\",\n" +
+                "                \"gender\" : \"Female\",\n" +
+                "                \"phone\" : 1800233232\n" +
+                "            }" ;
+
+        given()
+                .log().all()
+//                .header("Content-Type", "application/json")
+//                .contentType("application/json")
+                .contentType( ContentType.JSON) // this is providing header for request
+                .body(postStrBody).
+        when()
+                .post("/spartans").
+        then()
+                .log().all()
+                .statusCode( is(201) )
+                .contentType(ContentType.JSON)// this is asserting response header is json
+                .body("success" , is("A Spartan is Born!")  )
+                .body("data.name", is("Abigale") )
+        ;
+
+    }
+
+    @DisplayName("POST /spartans with external file")
+    @Test
+    public void testPostDataWithJsonFileAsBody(){
 
 
 
 
     }
-
 
 
 
