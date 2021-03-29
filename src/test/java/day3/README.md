@@ -164,13 +164,13 @@ then()
   
 This class is meant to be blueprint for Creating Spartan pojo to represent json data with 3 fields name, gender, phone
 
-`POJO` : Plain old java object , used to represent data
-  * Required part of POJO
-    * Encapsulated fields (private fields public getters and setters )
-    * No Arg Constructor
-  * OPTIONALLY
-    * we will add all arg constructor for creating object in one shot
-    * toString method to view the printed result
+**`POJO`** : **Plain old java object , used to represent data**
+ * Required part of POJO
+   * Encapsulated fields (private fields public getters and setters )
+   * No Arg Constructor
+ * OPTIONALLY
+   * we will add all arg constructor for creating object in one shot
+   * toString method to view the printed result
 ```java 
 package pojo;
 
