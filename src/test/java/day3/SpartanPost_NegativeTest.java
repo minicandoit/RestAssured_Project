@@ -2,7 +2,10 @@ package day3;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pojo.Spartan;
 import test_util.SpartanNoAuthBaseTest;
+
+import static io.restassured.RestAssured.given;
 
 public class SpartanPost_NegativeTest extends SpartanNoAuthBaseTest {
 
@@ -10,6 +13,16 @@ public class SpartanPost_NegativeTest extends SpartanNoAuthBaseTest {
     @DisplayName("Post request without content type expect 415")
     @Test
     public void test1(){
+
+        Spartan sp = new Spartan("B21", "Male" , 1231231231L) ;
+                given()
+                        .log().body()
+                        .body(sp).
+                when()
+                        .post("/spartans").
+                then()
+                        .statusCode(415) ;
+
 
     }
 
