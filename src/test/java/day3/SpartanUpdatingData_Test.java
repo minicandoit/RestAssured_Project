@@ -53,9 +53,9 @@ public class SpartanUpdatingData_Test extends SpartanNoAuthBaseTest {
         given()
                 .log().all()
                 .pathParam("id", 33)
-        .contentType(ContentType.JSON)
+                .contentType(ContentType.JSON)
                 .body(sp).
-                when()
+        when()
                 .put("/spartans/{id}").
         then()
                 .statusCode(204) ;
