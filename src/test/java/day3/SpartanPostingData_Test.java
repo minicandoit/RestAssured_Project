@@ -14,11 +14,12 @@ import static io.restassured.RestAssured.* ;
 import static org.hamcrest.Matchers.* ;
 
 @DisplayName("Testing adding data to Spartan app multiple way")
-public class SpartanPostingData_Test extends SpartanJsonPath_Test{
+public class SpartanPostingData_Test extends SpartanNoAuthBaseTest{
 
     @DisplayName("POST /spartans with String")
     @Test
     public void testPostDataWithStringBody(){
+
 
 
 
