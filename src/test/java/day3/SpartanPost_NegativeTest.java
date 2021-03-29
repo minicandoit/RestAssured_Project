@@ -7,6 +7,7 @@ import pojo.Spartan;
 import test_util.SpartanNoAuthBaseTest;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
 
 public class SpartanPost_NegativeTest extends SpartanNoAuthBaseTest {
 
@@ -42,6 +43,7 @@ public class SpartanPost_NegativeTest extends SpartanNoAuthBaseTest {
                 .log().all()
                 .statusCode(400)
 
+
         ;
 
 
@@ -51,7 +53,7 @@ public class SpartanPost_NegativeTest extends SpartanNoAuthBaseTest {
     @Test
     public void test3(){
 
-        Spartan sp = new Spartan("1", "Male" , 1231231231L) ;
+        Spartan sp = new Spartan("a", "Male" , 1231231231L) ;
 
         given()
                 .log().body()
@@ -62,8 +64,12 @@ public class SpartanPost_NegativeTest extends SpartanNoAuthBaseTest {
         then()
                 .log().all()
                 .statusCode(400)
+                .body("message",is("Invalid Input!") )
+                .body("errorCount",equalTo(1) )
+                .body("errors[0].reason" , is("name should be at least 2 character and max 15 character") )
 
-                ;
+
+        ;
 
 
 
