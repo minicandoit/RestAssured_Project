@@ -40,7 +40,9 @@ public class SpartanPost_NegativeTest extends SpartanNoAuthBaseTest {
                 .post("/spartans").
         then()
                 .log().all()
-                .statusCode(400) ;
+                .statusCode(400)
+
+        ;
 
 
     }
@@ -48,6 +50,22 @@ public class SpartanPost_NegativeTest extends SpartanNoAuthBaseTest {
     @DisplayName("Post request with valid json , bad name - expect 400 with detailed name error message")
     @Test
     public void test3(){
+
+        Spartan sp = new Spartan("1", "Male" , 1231231231L) ;
+
+        given()
+                .log().body()
+                .contentType(ContentType.JSON)
+                .body(sp).
+        when()
+                .post("/spartans").
+        then()
+                .log().all()
+                .statusCode(400)
+
+                ;
+
+
 
     }
 
