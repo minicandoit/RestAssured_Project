@@ -1,22 +1,16 @@
 package day3;
 
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import pojo.Spartan;
 import test_util.SpartanNoAuthBaseTest;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import org.junit.jupiter.api.*;
-import test_util.SpartanNoAuthBaseTest;
 
-import java.io.File;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static io.restassured.RestAssured.* ;
-import static org.hamcrest.Matchers.* ;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 public class SpartanUpdatingData_Test extends SpartanNoAuthBaseTest {
 
@@ -68,11 +62,36 @@ public class SpartanUpdatingData_Test extends SpartanNoAuthBaseTest {
     @Test
     public void testPartialUpdateDataWithString(){
 
+        String patchBody = " {\"phone\":1234567890 } " ;
+        System.out.println(patchBody); // {"phone":1234567890 }
 
+        given()
+                .log().all()
+                .pathParam("id",33)
+                .contentType(ContentType.JSON)
+                .body(patchBody).
+        when()
+                .patch("/spartans/{id}").
+        then()
+                .statusCode(204) ;
 
     }
 
 
+    @DisplayName("Test DELETE /spartans/{id} ")
+    @Test
+    public void testDeleteOne(){
+
+        given()
+                .log().uri()
+                .pathParam("id" , 1001).
+        when()
+                .delete("/spartans/{id}").
+        then()
+                .statusCode( equalTo(204) ) ;
+
+
+    }
 
 
 }
