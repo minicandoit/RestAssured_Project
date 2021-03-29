@@ -7,6 +7,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 import test_util.SpartanNoAuthBaseTest;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -138,6 +139,21 @@ public class SpartanJsonPath_Test extends SpartanNoAuthBaseTest{
                         + jp.getList("content.name"));
         System.out.println("jp.getList(\"content.phone\") = "
                         + jp.getList("content.phone"));
+
+        // getList method has 2 overloaded versions
+        // 1. jp.getList("json path here") ; -->> the type of list will be automatically determine
+        List<Integer>  allIds = jp.getList("content.id") ;
+        // 2. jp.getList("json path here", class Type  you want this list to have)
+        List<Integer> allIds2 = jp.getList("content.id" , Integer.class ) ;
+
+        List<String> allNames  = jp.getList("content.name") ;
+        List<String> allNames2 = jp.getList("content.name", String.class) ;
+
+        List<Long> allPhones  = jp.getList("content.phone") ;
+        List<Long> allPhones2 = jp.getList("content.phone", Long.class) ;
+
+
+
 
     }
 
