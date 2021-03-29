@@ -81,6 +81,17 @@ public class SpartanPostingData_Test extends SpartanNoAuthBaseTest{
 
     }
 
+    @DisplayName("POST /spartans with Map Object")
+    @Test
+    public void testPostDataWithMapObjectAsBody(){
+
+
+
+
+    }
+
+
+
 
 
 
