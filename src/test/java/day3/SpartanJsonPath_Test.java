@@ -118,6 +118,23 @@ public class SpartanJsonPath_Test extends SpartanNoAuthBaseTest{
     }
 
 
+    @DisplayName("Saving json array fields into List")
+    @Test
+    public void testSavingJsonArrayFieldsIntoList(){
+
+        JsonPath jp =
+                given()
+                        .queryParam("nameContains","Abigale")
+                        .queryParam("gender","Male")
+                        .log().all().
+                        when()
+                        .get("/spartans/search")
+                        .prettyPeek()
+                        .jsonPath();
+
+    }
+
+
 
 
 
