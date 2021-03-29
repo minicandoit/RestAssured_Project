@@ -74,6 +74,40 @@ public class SpartanJsonPath_Test extends SpartanNoAuthBaseTest{
         System.out.println("jp.getString(\"name[1]\") = "
                 + jp.getString("name[1]"));
 
+        System.out.println("jp.getMap(\"[0]\") = "
+                        + jp.getMap("[0]"));
+
+        // print first id in the json array response
+        System.out.println("jp.getInt(\"[0].id\") = "
+                + jp.getInt("[0].id"));
+
+
+    }
+
+    @DisplayName("Extract data from GET /spartans/search ")
+    @Test
+    public void testGetSearchSpartans(){
+
+        //http://18.235.32.166:8000/api/spartans/search
+        // ?nameContains=Abigale&gender=Male
+
+            JsonPath jp =
+                given()
+                        .queryParam("nameContains","Abigale")
+                        .queryParam("gender","Male")
+                        .log().all().
+                when()
+                        .get("/spartans/search")
+                        .prettyPeek()
+                        .jsonPath();
+        // find out first guy id  , second guy name
+        //  content[0].id           content[1].name
+        System.out.println("jp.getInt(\" content[0].id\") = "
+                + jp.getInt(" content[0].id"));
+
+        System.out.println("jp.getString(\"content[1].name\") = "
+                + jp.getString("content[1].name"));
+
 
     }
 
