@@ -2,7 +2,7 @@
 
 The Strength of RestAssured is method chaining to make all part of providing additional information before sending request , sending the request and verifying the response on one shot in BDD style of method chaining as below 
 
-# The Structure of RestAssured Method Chaining**
+# The Structure of RestAssured Method Chaining
 ```
 given() ....   --> RequestSpecification 
      .header  accept() contentType()
