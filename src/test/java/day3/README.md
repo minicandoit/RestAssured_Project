@@ -76,6 +76,7 @@ Result
     }
 ]
 ```
+More detailed examples can be found [here](SpartanJsonPath_Test.java)
 
 
 
