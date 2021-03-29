@@ -92,13 +92,17 @@ public class SpartanPostingData_Test extends SpartanNoAuthBaseTest{
                 "phone" : 1800233232
             }
 * */
+
         Map<String,Object> bodyMap = new LinkedHashMap<>();
         bodyMap.put("name","Abigale");
         bodyMap.put("gender","Female");
         bodyMap.put("phone",1800233232L);
 
-        System.out.println("bodyMap = " + bodyMap);
 
+        System.out.println("bodyMap = " + bodyMap);
+        // We are expecting this Java Map object to be converted into Json String and send as body
+        // initially it failed , RestAssured can no find any serializer to convert java object to json
+        // We added Jackson-data-bind dependency in pom , so RestAssured can used it to make it conversion happen
         given()
                 .log().all()
                 .contentType(ContentType.JSON)
@@ -109,6 +113,26 @@ public class SpartanPostingData_Test extends SpartanNoAuthBaseTest{
                 .log().all()
                 .statusCode(201)
         ;
+
+
+
+
+    }
+
+
+    @DisplayName("POST /spartans with POJO")
+    @Test
+    public void testPostDataWithPOJOAsBody(){
+
+        // Spartan sp = new Spartan("Abigale","Female",1800233232L) ;
+        // turn into below
+        /*
+         {
+            "name": "Abigale",
+            "gender": "Female",
+            "phone": 1800233232
+        }
+         */
 
 
 
