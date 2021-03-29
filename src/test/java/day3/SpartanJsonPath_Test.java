@@ -176,6 +176,33 @@ public class SpartanJsonPath_Test extends SpartanNoAuthBaseTest{
 
     }
 
+    // Practice jsonPath as much as you can , using all those requests we have sent in Postman
+    /*
+     * for example :
+     * GET http://www.omdbapi.com/?t=Superman&apiKey=YOUR KEY GOES HERE
+     * save and print below information from the response using JsonPath
+     *
+     *  Title , Year , imdbRating  in correct data type
+     *  Get second Ratings source
+     *  Get first Ratings value
+     *
+     *
+     * GET http://www.omdbapi.com/?s=Flash&type=series&apiKey=YOUR KEY GOES HERE
+     *
+     *  save and print 3rd json object fields : Title , Year , imdbID
+     *  save and print all of the json array imdbID in to List<String>
+     *
+     *  print totalResult field value
+     *  the request is designed to only give you 10 results per page
+     *  Optionally :
+     *      send more request if the result is more than 10
+     *
+     *  eventually save all movie titles from all the pages into List<String>
+        from each and every pages
+     *
+
+     */
+
 
 
 
