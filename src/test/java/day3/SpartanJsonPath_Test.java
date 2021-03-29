@@ -157,7 +157,24 @@ public class SpartanJsonPath_Test extends SpartanNoAuthBaseTest{
 
     }
 
+    @DisplayName("Get List Practice for GET /spartans")
+    @Test
+    public void testGetListOutOfAllSpartans(){
 
+        JsonPath jp = get("/spartans").jsonPath();
+        // save the list into List object and assert the size
+
+        List<Integer> allIds = jp.getList("id" , Integer.class) ;
+        List<String> allNames = jp.getList("name" , String.class) ;
+        List<Long> allPhones = jp.getList("phone" , Long.class) ;
+
+        assertThat( allIds , hasSize(12220)  );
+        assertThat( allNames , hasSize(12220)  );
+        assertThat( allPhones , hasSize(12220)  );
+
+
+
+    }
 
 
 
