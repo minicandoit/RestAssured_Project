@@ -1,5 +1,6 @@
 package day3;
 
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pojo.Spartan;
@@ -21,6 +22,7 @@ public class SpartanPost_NegativeTest extends SpartanNoAuthBaseTest {
                 when()
                         .post("/spartans").
                 then()
+                        .log().all()
                         .statusCode(415) ;
 
 
@@ -29,6 +31,17 @@ public class SpartanPost_NegativeTest extends SpartanNoAuthBaseTest {
     @DisplayName("Post request without valid json expect 400")
     @Test
     public void test2(){
+
+        given()
+                .log().all()
+                .contentType(ContentType.JSON)
+                .body(" BAD JSON STRUCTURE HERE ").
+        when()
+                .post("/spartans").
+        then()
+                .log().all()
+                .statusCode(400) ;
+
 
     }
 
