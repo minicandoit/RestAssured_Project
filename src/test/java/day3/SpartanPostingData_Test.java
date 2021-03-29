@@ -7,6 +7,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 import test_util.SpartanNoAuthBaseTest;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +57,26 @@ public class SpartanPostingData_Test extends SpartanNoAuthBaseTest{
     @Test
     public void testPostDataWithJsonFileAsBody(){
 
+        // singleSpartan.json with below content
+        /*
+           {
+                "name" : "Abigale",
+                "gender" : "Female",
+                "phone" : 1800233232
+            }
+         */
+        File jsonFile = new File("singleSpartan.json");
 
+        given()
+                .log().all()
+                .contentType(ContentType.JSON)
+                .body(jsonFile).
+        when()
+                .post("/spartans").
+        then()
+                .log().all()
+                .statusCode(201)
+                ;
 
 
     }
