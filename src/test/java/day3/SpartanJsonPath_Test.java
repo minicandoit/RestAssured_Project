@@ -39,12 +39,11 @@ public class SpartanJsonPath_Test extends SpartanNoAuthBaseTest{
         myId =   jp.getInt("id") ;
         System.out.println(" the result is = " + myId);
 
+        long phoneNum =  jp.getLong("phone") ;
+        System.out.println("phoneNum = " + phoneNum);
 
-
-
-
-
-
+        System.out.println("Save whole json object into map = "
+                + jp.getMap(""));
 
 
     }
