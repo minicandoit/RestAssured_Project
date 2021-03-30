@@ -14,5 +14,15 @@ import static org.hamcrest.Matchers.*;
 public class LibraryAppAuthorizedRequestTest extends LibraryAppBaseTest {
 
 
+    @DisplayName("GET /get_user_by_id/{user_id}")
+    @Test
+    public void testOneUser(){
+
+
+
+
+    }
+
+
 
 }
