@@ -50,7 +50,24 @@ public class LibraryAppTest {
         then()
                 .statusCode(200)
                 .log().all()
+                .body("token" , is(not( blankOrNullString()  ) )   )
                 ;
+
+
+
+    }
+
+
+    @DisplayName("test the token")
+    @Test
+    public void testGetTokenDecodeToken(){
+
+        // first send request to POST /login extract token
+        // then send request to POST /decode to verify emails and other info
+        String username = "librarian69@library" ;
+        String password =  "KNPXrm3S";
+
+        String myToken =
 
 
 
