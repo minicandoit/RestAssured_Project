@@ -105,7 +105,15 @@ public class LibraryAppAuthorizedRequestTest extends LibraryAppBaseTest {
         then()
                 .log().body()
                 .statusCode(200)
-                ;
+                .body("id" , is( newBookId+"" ) )
+                .body("name",  is ( newBook.get("name") ) )
+                .body("isbn",  is ( newBook.get("isbn") ) )
+                .body("year",  is ( newBook.get("year")+"" ) )
+                .body("author",  is ( newBook.get("author") ) )
+                .body("book_category_id",  is ( newBook.get("book_category_id")+"" ) )
+                .body("description",  is ( newBook.get("description") ) )
+
+        ;
 
 
 
