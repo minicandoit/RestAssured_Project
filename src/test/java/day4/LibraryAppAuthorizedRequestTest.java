@@ -69,28 +69,46 @@ public class LibraryAppAuthorizedRequestTest extends LibraryAppBaseTest {
     @DisplayName("POST /add_book")
     @Test
     public void testAddOneBook(){
-/*
-    name Awesome book
-    isbn IMDBS132
-    year 2019
-    author Ike
-    book_category_id 2
-    description good book
- */
+        /*
+            name Awesome book
+            isbn IMDBS132
+            year 2019
+            author Ike
+            book_category_id 2
+            description good book
+         */
+        Map<String, Object> newBook = getRandomBook();
 
-
+       int newBookId =
         given()
                 .log().all()
                 .header("x-library-token", librarianToken)
                 .contentType(ContentType.URLENC)
                 // using formParams with s we can pass multiple param in one shot
-                .formParams(  getRandomBook()  ).
+                .formParams(  newBook  ).
         when()
                 .post("/add_book").
         then()
-                .log().all()
+                .log().body()
                 .statusCode(200)
+              .extract()
+               .jsonPath().getInt("book_id")
             ;
+       // Send additional request to GET /get_book_by_id/{book_id}
+        // to verify all data has been added correctly
+        given()
+                .header("x-library-token", librarianToken)
+                .log().uri()
+                .pathParam("book_id" , newBookId).
+        when()
+                .get("/get_book_by_id/{book_id}").
+        then()
+                .log().body()
+                .statusCode(200)
+                ;
+
+
+
 
     }
 
