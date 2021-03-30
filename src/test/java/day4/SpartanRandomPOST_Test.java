@@ -146,6 +146,8 @@ public class SpartanRandomPOST_Test extends SpartanNoAuthBaseTest {
 
         System.out.println("locationHeader = " + locationHeader);
 
+        // sending fer request using above url we extracted
+//        get(locationHeader).prettyPeek();
     }
 
 
