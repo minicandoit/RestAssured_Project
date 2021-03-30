@@ -34,6 +34,24 @@ public class LibraryAppAuthorizedRequestTest extends LibraryAppBaseTest {
         ;
     }
 
+    @DisplayName("GET /get_all_users")
+    @Test
+    public void testGetAllUsers(){
+
+        String myToken = getToken("librarian69@library", "KNPXrm3S");
+        System.out.println("myToken = " + myToken);
+
+        given()
+                .header("x-library-token", myToken).
+        when()
+                .get("/get_all_users").
+        then()
+                .statusCode(200);
+
+
+
+    }
+
 
 
 }
