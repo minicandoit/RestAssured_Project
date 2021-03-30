@@ -62,9 +62,52 @@ public class SpartanRandomPOST_Test extends SpartanNoAuthBaseTest {
                 .body("data.gender" ,  is( randomPOJO.getGender() ) )
                 .body("data.phone" ,  is( randomPOJO.getPhone() ) )
         ;
-
-
-
     }
+
+    @DisplayName("POST /spartans and send GET /spartans/{id} to verify")
+    @Test
+    public void testAddOneDataThenGetOneDataToVerify(){
+
+        // send post request , save the id that generated
+        // check status code is 201
+        // send get request using the id you saved from above
+        // check status code is 200 and body match for exactly what you send
+        Spartan randomPOJO = SpartanUtil.getRandomSpartanPOJO() ;
+
+        Response response = given()
+                                    .log().body()
+                                    .contentType(ContentType.JSON)
+                                    .body(randomPOJO).
+                            when()
+                                .post("/spartans").prettyPeek();
+
+        int newId = response.path("data.id") ;
+        System.out.println("newId = " + newId);
+//        int newId = response.jsonPath().getInt("data.id") ;
+        assertThat(response.statusCode() , is(201) );
+
+        given()
+                .log().uri()
+                .pathParam("id" , newId).
+        when()
+                .get("/spartans/{id}").
+        then()
+                .log().body()
+                .statusCode(200)
+                .body("id" , is( newId )  )
+                .body("name" , is(randomPOJO.getName() )      )
+                .body("gender" , is(randomPOJO.getGender() )    )
+                .body("phone", is(randomPOJO.getPhone() ) )
+        ;
+    }
+
+
+
+
+
+
+
+
+
 
 }
