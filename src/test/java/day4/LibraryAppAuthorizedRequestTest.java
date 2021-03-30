@@ -1,11 +1,15 @@
 package day4;
 
+import org.hamcrest.Matchers;
 import test_util.LibraryAppBaseTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.*;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class LibraryAppAuthorizedRequestTest extends LibraryAppBaseTest {
 
@@ -37,14 +41,25 @@ public class LibraryAppAuthorizedRequestTest extends LibraryAppBaseTest {
 
         System.out.println("myToken = " + librarianToken);
 
-        given()
-                .header("x-library-token", librarianToken).
-        when()
-                .get("/get_all_users").
-        then()
-                .log().all()
-                .statusCode(200);
 
+        List<String> allNames =
+                given()
+                        .header("x-library-token", librarianToken).
+                when()
+                        .get("/get_all_users").
+                then()
+                        //.log().all()
+                        .statusCode(200).
+                    extract()
+                        // extracting jsonpath so we can call getList method
+                        .jsonPath()
+                        .getList("name", String.class)
+        ;
+        // assert the size is 8465
+        assertThat(allNames, hasSize(8665));
+        // print the unique names count
+        Set<String> uniqueNames = new HashSet<>( allNames ) ;
+        System.out.println("uniqueNames.size() = " + uniqueNames.size() );
 
 
     }
