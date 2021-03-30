@@ -41,10 +41,28 @@ public class SpartanRandomPOST_Test extends SpartanNoAuthBaseTest {
                 .body("data.name" , is( randomRequestBodyMap.get("name") )   )
                 .body("data.gender", is(randomRequestBodyMap.get("gender") ) )
                 .body("data.phone", is(randomRequestBodyMap.get("phone") ) )
-
-
-
         ;
+    }
+
+    @DisplayName("/POST /spartans with random Spartan POJO")
+    @Test
+    public void addOneRandomSpartanPOJOTest(){
+
+        Spartan randomPOJO = SpartanUtil.getRandomSpartanPOJO();
+
+        given()
+                .log().body()
+                .contentType(ContentType.JSON)
+                .body( randomPOJO ).
+        when()
+                .post("/spartans").
+        then()
+                .log().all()
+                .body("data.name" ,  is( randomPOJO.getName() ) )
+                .body("data.gender" ,  is( randomPOJO.getGender() ) )
+                .body("data.phone" ,  is( randomPOJO.getPhone() ) )
+        ;
+
 
 
     }
