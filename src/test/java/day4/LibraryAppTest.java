@@ -1,12 +1,14 @@
 package day4;
 
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 @DisplayName("Library App Simple Test")
@@ -108,7 +110,27 @@ public class LibraryAppTest {
         then()
                 .log().all()
                 .statusCode(200)
-                ;
+                .body("book_count" , is("2107")  )
+                .body("borrowed_books" , is("775")  )
+                .body("users" , is("8665")  )
+        ;
+        // alternatively , extract JsonPath object after status code check
+        // assert each numbers separately
+        JsonPath jp =
+                given()
+                        .header("x-library-token",myToken).
+                when()
+                        .get("/dashboard_stats").
+                then()
+                        .statusCode(200).
+                  extract()
+                        .jsonPath() ;
+
+        assertThat( jp.getInt("book_count") , is(2107) ) ;
+        assertThat( jp.getInt("borrowed_books") , is(775) ) ;
+        assertThat( jp.getInt("users") , is(8665) ) ;
+
+
 
 
     }
