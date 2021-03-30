@@ -18,9 +18,20 @@ public class LibraryAppAuthorizedRequestTest extends LibraryAppBaseTest {
     @Test
     public void testOneUser(){
 
+       String myToken = getToken("librarian69@library", "KNPXrm3S");
+        System.out.println("myToken = " + myToken);
 
-
-
+        //we are sending request to this endpoint  : GET /get_user_by_id/1
+        given()
+                .log().all()
+                .header("x-library-token", myToken)
+                .pathParam("user_id", 1).
+        when()
+            .get("/get_user_by_id/{user_id}").
+        then()
+                .log().all()
+                .statusCode(200)
+        ;
     }
 
 
