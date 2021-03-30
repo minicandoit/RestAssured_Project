@@ -54,7 +54,6 @@ public class LibraryAppTest {
                 ;
 
 
-
     }
 
 
@@ -67,8 +66,30 @@ public class LibraryAppTest {
         String username = "librarian69@library" ;
         String password =  "KNPXrm3S";
 
-        String myToken =
+        String myToken = given()
+                                .log().all()
+                                .contentType(ContentType.URLENC)
+                                .formParam("email", username)
+                                .formParam("password" , password).
+                        when()
+                                .post("/login").
+                        then()
+                                .log().all()
+                                .statusCode(200).
+                        extract()
+                                .path("token") ;
 
+        given()
+                .log().all()
+                .contentType(ContentType.URLENC)
+                .formParam("token", myToken  ).
+        when()
+                .post("/decode").
+        then()
+                .log().all()
+                .statusCode(200)
+                .body("email" , is( username) )
+                ;
 
 
     }
