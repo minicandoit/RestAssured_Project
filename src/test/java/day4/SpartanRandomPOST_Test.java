@@ -25,7 +25,7 @@ public class SpartanRandomPOST_Test extends SpartanNoAuthBaseTest {
     @DisplayName("/POST /spartans with random Data")
     @Test
     public void addOneRandomSpartanTest(){
-        // this is the mao object we sent as body , it's expected result
+        // this is the map object we sent as body , it's expected result
         Map<String, Object> randomRequestBodyMap
                     = SpartanUtil.getRandomSpartanMap() ;
 
@@ -47,7 +47,7 @@ public class SpartanRandomPOST_Test extends SpartanNoAuthBaseTest {
     @DisplayName("/POST /spartans with random Spartan POJO")
     @Test
     public void addOneRandomSpartanPOJOTest(){
-
+        // this spartan object is request body and expected data from the response
         Spartan randomPOJO = SpartanUtil.getRandomSpartanPOJO();
 
         given()
