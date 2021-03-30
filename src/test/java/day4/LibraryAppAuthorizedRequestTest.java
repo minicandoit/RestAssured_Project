@@ -14,11 +14,12 @@ import static org.hamcrest.Matchers.*;
 public class LibraryAppAuthorizedRequestTest extends LibraryAppBaseTest {
 
 
+
     @DisplayName("GET /get_user_by_id/{user_id}")
     @Test
     public void testOneUser(){
 
-       String myToken = getToken("librarian69@library", "KNPXrm3S");
+
         System.out.println("myToken = " + myToken);
 
         //we are sending request to this endpoint  : GET /get_user_by_id/1
@@ -38,7 +39,6 @@ public class LibraryAppAuthorizedRequestTest extends LibraryAppBaseTest {
     @Test
     public void testGetAllUsers(){
 
-        String myToken = getToken("librarian69@library", "KNPXrm3S");
         System.out.println("myToken = " + myToken);
 
         given()
@@ -46,6 +46,7 @@ public class LibraryAppAuthorizedRequestTest extends LibraryAppBaseTest {
         when()
                 .get("/get_all_users").
         then()
+                .log().all()
                 .statusCode(200);
 
 
