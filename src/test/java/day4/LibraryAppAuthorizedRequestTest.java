@@ -77,20 +77,14 @@ public class LibraryAppAuthorizedRequestTest extends LibraryAppBaseTest {
     book_category_id 2
     description good book
  */
-        Map<String,Object> myBookMap = new HashMap<>();
-        myBookMap.put("name","B21 RestAssured");
-        myBookMap.put("isbn","21000001");
-        myBookMap.put("year",2021);
-        myBookMap.put("author","Cybertek");
-        myBookMap.put("book_category_id",4);
-        myBookMap.put("description","B21 learning RestAssured to shine");
+
 
         given()
                 .log().all()
                 .header("x-library-token", librarianToken)
                 .contentType(ContentType.URLENC)
                 // using formParams with s we can pass multiple param in one shot
-                .formParams( myBookMap ).
+                .formParams(  getRandomBook()  ).
         when()
                 .post("/add_book").
         then()
