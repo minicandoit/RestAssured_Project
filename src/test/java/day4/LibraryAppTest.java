@@ -22,6 +22,20 @@ import static org.hamcrest.Matchers.* ;
 @DisplayName("Library App Simple Test")
 public class LibraryAppTest {
 
+    @BeforeAll
+    public static void init(){
+
+        baseURI  = "http://library1.cybertekschool.com" ;
+        basePath = "/rest/v1" ;
+
+    }
+
+    @AfterAll
+    public static void cleanup(){
+        reset();
+    }
+
+    //@DisplayName("test POST /login")
 
 
 
