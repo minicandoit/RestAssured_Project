@@ -124,11 +124,30 @@ public class SpartanRandomPOST_Test extends SpartanNoAuthBaseTest {
         System.out.println("newId = " + newId);
         // continue from here to verify the rest
 
+    }
 
+    @DisplayName("POST /spartans and send GET /spartans/{id} to verify 3")
+    @Test
+    public void testAddOneDataThenExtractHeader(){
+        // check status code 201 and extract Location header
+        Spartan randomPOJO = SpartanUtil.getRandomSpartanPOJO() ;
 
+        String locationHeader =
+                given()
+                    .log().body()
+                    .contentType(ContentType.JSON)
+                    .body(randomPOJO).
+                when()
+                    .post("/spartans").
+                then()
+                    .statusCode(201).
+                extract()
+                    .header("Location") ;
 
+        System.out.println("locationHeader = " + locationHeader);
 
     }
+
 
 
 
