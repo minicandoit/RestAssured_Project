@@ -35,8 +35,26 @@ public class LibraryAppTest {
         reset();
     }
 
-    //@DisplayName("test POST /login")
+    @DisplayName("test POST /login")
+    @Test
+    public void testLogin(){
 
+        // librarian69@library  , KNPXrm3S
+        given()
+                .log().all()
+                .contentType(ContentType.URLENC) //"application/x-www-form-urlencoded"
+                .formParam("email" , "librarian69@library")
+                .formParam("password" , "KNPXrm3S").
+        when()
+                .post("/login").
+        then()
+                .statusCode(200)
+                .log().all()
+                ;
+
+
+
+    }
 
 
 
