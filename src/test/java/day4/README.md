@@ -104,3 +104,7 @@ Now we can use it in our `POST` request as below
 
 Here is the [full class](SpartanRandomPOST_Test.java)
 
+# `POST` Request with x-www--urlecnoded-form
+
+Here is the full example of [Library App Post Requests](LibraryAppAuthorizedRequestTest.java)
+
