@@ -47,6 +47,8 @@ public class CsvSourceParameterizedTest {
         System.out.println("stateArg = " + stateArg);
         System.out.println("cityArg = " + cityArg);
 
+        // try printing out the zip code count
+    int placeCount =
         given()
                 .baseUri("https://api.zippopotam.us")
                 .pathParam("state",  stateArg)
@@ -55,10 +57,15 @@ public class CsvSourceParameterizedTest {
         when()
                 .get("/us/{state}/{city}").
         then()
-                .log().body()
+                //.log().body()
                 .statusCode(200)
+            .extract()
+                .jsonPath()
+                .getList("places")
+                .size()
                 ;
-        // try printing out the zip code count
+        System.out.println("placeCount = " + placeCount);
+
 
 
     }
