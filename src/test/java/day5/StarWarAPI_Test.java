@@ -32,6 +32,27 @@ public class StarWarAPI_Test {
         basePath = "/api" ;
     }
 
+    @DisplayName("GET average height from GET /people response")
+    @Test
+    public void testGetAverageHeight(){
+
+        List<Integer> allHeights =  get("/people")
+                                    .jsonPath()
+                                    .getList("results.height", Integer.class)
+                                    ;
+        System.out.println("allHeights = " + allHeights);
+        // from here it's all java
+        int total = 0;
+        for (Integer height : allHeights) {
+            total+=height;
+        }
+        int average = total/(allHeights.size());
+        System.out.println("average = " + average);
+
+
+    }
+
+
 
     @AfterAll
     public static void cleanup(){
