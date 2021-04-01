@@ -1,24 +1,15 @@
 package day5;
 
-import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
-import pojo.Spartan;
-import spartan_util.SpartanUtil;
-import test_util.SpartanNoAuthBaseTest;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import org.junit.jupiter.api.*;
-import test_util.SpartanNoAuthBaseTest;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static io.restassured.RestAssured.* ;
-import static org.hamcrest.Matchers.* ;
+import static io.restassured.RestAssured.*;
 
 public class StarWarAPI_Test {
 
@@ -84,7 +75,9 @@ public class StarWarAPI_Test {
 
 
         List<Integer> firstPageHeights = jp.getList("results.height") ;
+        System.out.println("firstPageHeights = " + firstPageHeights);
         allHeights.addAll(firstPageHeights ) ;
+
 
         // now it's time to loop and get the rest of the pages
         for (int pageNum = 2; pageNum <= pageCount ; pageNum++) {
@@ -94,12 +87,14 @@ public class StarWarAPI_Test {
                                                     .jsonPath()
                                                     .getList("results.height");
             allHeights.addAll( heightsOnThisPage ) ;
-
+            // just in case you wanted to see each pages height
+            System.out.println("heightsOnThisPage = " + heightsOnThisPage);
         }
-
+        // third page has a value unknown and it's somehow got stored since getList get all all
+        // jsonPath is backed by groovy language and it's allowing such value here so we will remove it
+        allHeights.remove("unknown") ;
         System.out.println("allHeights = " + allHeights);
-
-
+        System.out.println("allHeights.size() = " + allHeights.size());
 
     }
 
