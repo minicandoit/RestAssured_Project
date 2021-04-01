@@ -99,15 +99,62 @@ Few Options to Parameterize the test
     ```
 
 * `@CsvSource`
-```csv
-1, 3 , 4 
-2, 3 , 5 
-8, 7 , 15 
-```
-
+    ```csv
+    1, 3 , 4 
+    2, 3 , 5 
+    8, 7 , 15 
+    ```
+  You can use this as Test data to provide more than one value per iteration of test 
+  ```java
+  @ParameterizedTest
+  @CsvSource({"1, 3 , 4",
+              "2, 3 , 5",
+              "8, 7 , 15",
+              "10, 9 , 19"
+              })
+  public void testAddition(int num1 , int num2 , int expectedResult ){
+    // this will run for 4 iteration
+    // num1 = 1 , num2 = 3 , expectedResult = 4
+    // num1 = 2 , num2 = 3 , expectedResult = 5
+    // num1 = 8 , num2 = 7 , expectedResult = 15
+    // num1 = 10 , num2 = 9 , expectedResult = 19
+  }
+  ```
+  [Full Example Here](CsvSourceParameterizedTest.java)
 
 
 * `@CSVFileSource`
-    
+
+You can also use external csv file to data drive the test. 
+
+You can place the csv file under [resource folder](../../resources) for easy access. 
+
+In our example we added a file with name [state_city_zipCount.csv](../../resources/state_city_zipCount.csv) under resource folder. 
+It has below content 
+```
+state,city,zip_count
+NY, New York,166
+CO, Denver,76
+VA, Fairfax,10
+VA, Arlington,33
+MA, Boston,56
+VA,McLean,3
+MD, Annapolis,9
+```
+
+Now we can point to that file in the Parameterized Test as below 
+
+```java
+// if the file was under resources folder, you can use resources = "path here"
+// if the first line is header numLinesToSkip = 1 will start from second line
+@ParameterizedTest
+@CsvFileSource(resources = "/state_city_zipCount.csv" , numLinesToSkip = 1 )
+public void testStateCityToZipEndpointWithCSVFile(String stateArg, String cityArg , int zipArg  ){
+
+
+}
+```
+Here is the [full example](CSVFileSourceParameterizedTest.java)
+
 
 
