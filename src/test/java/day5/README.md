@@ -125,36 +125,72 @@ Few Options to Parameterize the test
 
 * `@CSVFileSource`
 
-You can also use external csv file to data drive the test. 
+  You can also use external csv file to data drive the test. 
+  
+  You can place the csv file under [resource folder](../../resources) for easy access. 
+  
+  In our example we added a file with name [state_city_zipCount.csv](../../resources/state_city_zipCount.csv) under resource folder. 
+  It has below content 
+  ```
+  state,city,zip_count
+  NY, New York,166
+  CO, Denver,76
+  VA, Fairfax,10
+  VA, Arlington,33
+  MA, Boston,56
+  VA,McLean,3
+  MD, Annapolis,9
+  ```
 
-You can place the csv file under [resource folder](../../resources) for easy access. 
+  Now we can point to that file in the Parameterized Test as below 
 
-In our example we added a file with name [state_city_zipCount.csv](../../resources/state_city_zipCount.csv) under resource folder. 
-It has below content 
-```
-state,city,zip_count
-NY, New York,166
-CO, Denver,76
-VA, Fairfax,10
-VA, Arlington,33
-MA, Boston,56
-VA,McLean,3
-MD, Annapolis,9
-```
+  ```java
+  // if the file was under resources folder, you can use resources = "path here"
+  // if the first line is header numLinesToSkip = 1 will start from second line
+  @ParameterizedTest
+  @CsvFileSource(resources = "/state_city_zipCount.csv" , numLinesToSkip = 1 )
+  public void testStateCityToZipEndpointWithCSVFile(String stateArg, String cityArg , int zipArg  ){
+  
+  
+  }
+  ```
+  Here is the [full example](CSVFileSourceParameterizedTest.java)
 
-Now we can point to that file in the Parameterized Test as below 
-
-```java
-// if the file was under resources folder, you can use resources = "path here"
-// if the first line is header numLinesToSkip = 1 will start from second line
-@ParameterizedTest
-@CsvFileSource(resources = "/state_city_zipCount.csv" , numLinesToSkip = 1 )
-public void testStateCityToZipEndpointWithCSVFile(String stateArg, String cityArg , int zipArg  ){
-
-
-}
-```
-Here is the [full example](CSVFileSourceParameterizedTest.java)
-
+* `MethodSource`
+    Allows you to refer to one or more factory methods of the test class or external classes.
+  ```java
+   // This test is expected to get the data from the returned value 
+   // of a method called getManyNames 
+   // JUnit5 expect this method to return Stream<SomeType>
+   // We were able to provide a method that return List<SomeType>
+   // and it was automatically converted and used as data source 
+    @ParameterizedTest
+    @MethodSource("getManyNames")
+    public void testPrintNames(String name){
+  
+        System.out.println("name = " + name);
+        assertTrue( name.length()>=4 ) ;
+  
+    }
+  
+  // create a static method to return many names
+    public static List<String> getManyNames(){
+    // YOU CAN DO WHATEVER YOU WANT HERE .........
+      List<String> nameList = Arrays.asList("Emre","Mustafa","Diana","Shirin","Tucky","Don Corleone","Erjon","Muhammad","Saya","Afrooz") ;
+      return nameList ;
+  
+    }
+    
+  //// This is how it should be 
+  //    // create a static method to return many names
+  //    public static Stream<String> getManyNames(){
+  //
+  //        List<String> nameList = Arrays.asList("Emre","Mustafa","Diana","Shirin","Tucky","Don Corleone","Erjon","Muhammad","Saya","Afrooz") ;
+  //        return nameList.stream() ;
+  //
+  //    }
+    
+    ```
+  Here is the [full example](MethodSourceForParameterizedTest.java)
 
 
