@@ -11,6 +11,7 @@ import org.junit.jupiter.api.*;
 import test_util.SpartanNoAuthBaseTest;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +49,56 @@ public class StarWarAPI_Test {
         }
         int average = total/(allHeights.size());
         System.out.println("average = " + average);
+
+
+    }
+    // Above code will only retrieve first page that include 10 people
+    // but we have more than 10 people in star war
+    // we can get total count of people in first response count field
+    // the decide how many page we have to go through by sending more request
+    // then loop through the rest of the pages to add all heights to the list
+    // and calculate the average from final list
+    // in order to go to next page we can use
+    // page query parameter to decide which page we want to see
+
+    // HERE IS THE STEPS :
+    // Create an empty Integer empty list
+    //  Send GET /people -->>
+        // capture the total count using jsonPath
+        // save first page heights into the list
+
+    //  Loop : from page 2 till last page
+        // get the list of height integer using jsonPath
+        // add this to the big list
+    @DisplayName("Get all heights from all the pages and find average")
+    @Test
+    public void testGetAllPagesAverageHeight(){
+
+        List<Integer> allHeights = new ArrayList<>() ;
+
+        // send initial request , find total count and decide how many pages exists
+        JsonPath jp =  get("/people").jsonPath() ;
+        int peopleCount =  jp.getInt("count") ;  //82
+        // if there is remainder we want to add 1 , if there is not keep it as is
+        int pageCount = (peopleCount % 10==0)  ? peopleCount / 10  :  (peopleCount / 10)+1 ;
+
+
+        List<Integer> firstPageHeights = jp.getList("results.height") ;
+        allHeights.addAll(firstPageHeights ) ;
+
+        // now it's time to loop and get the rest of the pages
+        for (int pageNum = 2; pageNum <= pageCount ; pageNum++) {
+            // GET /people?page = yourPageNumberGoesHere
+
+            List<Integer> heightsOnThisPage =   get("/people?page="+pageNum )
+                                                    .jsonPath()
+                                                    .getList("results.height");
+            allHeights.addAll( heightsOnThisPage ) ;
+
+        }
+
+        System.out.println("allHeights = " + allHeights);
+
 
 
     }
