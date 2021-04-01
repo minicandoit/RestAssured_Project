@@ -25,7 +25,7 @@ public class MovieAPI_Practice {
             given()
                     .baseUri("http://www.omdbapi.com")
                     .log().all()
-                    .queryParam("apikey" ,  "YOUR OWN KEY")
+                    .queryParam("apikey" ,  "5b5d0fe8")
                     .queryParam("s" , "Superman")
                     .queryParam("type","series").
             when()
@@ -37,8 +37,27 @@ public class MovieAPI_Practice {
                 .extract()
                     .jsonPath()
         ;
-        List<String> allTitles = jp.getList("Search.Title") ;
+        // json Path to get all movie title is  Search.Title
+        List<String> allTitles = jp.getList("Search.Title", String.class) ;
         System.out.println("allTitles = " + allTitles);
+
+        // assert the size of this list is 10
+        assertThat(allTitles , hasSize(10) );
+
+        // assert first item contains String Superman
+        assertThat(allTitles.get(0)  , containsString("Superman") );
+
+        // assert it has item "Superman and Lois"
+        assertThat(allTitles ,  hasItem("Superman and Lois")  );
+
+        // assert it has items "Superman and Lois" , "The New Adventures of Superman"
+        assertThat(allTitles , hasItems( "Superman and Lois" , "The New Adventures of Superman"));
+
+        // assert every items contains String Superman
+
+        assertThat(allTitles , everyItem(  containsString("Superman")   )    );
+
+
 
 
 
