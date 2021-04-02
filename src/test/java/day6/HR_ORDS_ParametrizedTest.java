@@ -6,8 +6,11 @@ import static org.hamcrest.Matchers.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import test_util.HR_ORDS_API_BaseTest;
+
+import java.util.*;
 
 public class HR_ORDS_ParametrizedTest extends HR_ORDS_API_BaseTest {
 
@@ -60,6 +63,25 @@ public class HR_ORDS_ParametrizedTest extends HR_ORDS_API_BaseTest {
                .body("items[0].country_name", is(  countryNameArg  ) )
         ;
    }
+
+   @ParameterizedTest
+   @MethodSource("getManyCountryIds")
+   public void testCountryWithMethodSource(String countryIdArg){
+
+       System.out.println("countryIdArg = " + countryIdArg);
+
+   }
+
+
+
+   // write static method that return list of country ids
+    public static List<String> getManyCountryIds(){
+
+        List<String> countryNameList = Arrays.asList("AR", "BE","US") ;
+        return countryNameList ;
+
+    }
+
 
 
 
