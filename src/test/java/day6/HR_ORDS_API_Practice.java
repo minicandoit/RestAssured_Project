@@ -1,7 +1,7 @@
 package day6;
 
 import static io.restassured.RestAssured.*;
-
+import static org.hamcrest.Matchers.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -25,7 +25,23 @@ public class HR_ORDS_API_Practice {
     public void testAllRegions(){
 
         //get("/regions").prettyPeek() ;
+        // log the request uri
+        // send GET /regions request
+        // log the response
+        // test status code is 200
+        // test the count is 4
+        // also test the size of items json array is 4
+        given()
+                .log().uri().
+        when()
+                .get("/regions").
+        then()
+                .log().all()
+                .statusCode(200)
+                .body("count", equalTo(4))
+                .body("items", hasSize(4) )
 
+        ;
 
     }
 
