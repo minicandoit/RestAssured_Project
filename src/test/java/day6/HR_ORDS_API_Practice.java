@@ -1,7 +1,10 @@
 package day6;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+
+import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -40,8 +43,22 @@ public class HR_ORDS_API_Practice {
                 .statusCode(200)
                 .body("count", equalTo(4))
                 .body("items", hasSize(4) )
-
         ;
+
+    }
+
+    @DisplayName("GET /regions test day 1 style")
+    @Test
+    public void testAllRegions2(){
+
+        Response response = given().log().uri()
+                            .when().get("/regions")
+                            .prettyPeek();
+
+        assertThat(response.statusCode() , is(200)) ;
+        // verify the count field from json is 4
+        assertThat(response.path("count") , equalTo(4) );
+        assertThat(response.path("items") , hasSize(4)  );
 
     }
 
