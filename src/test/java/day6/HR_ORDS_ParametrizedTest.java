@@ -1,8 +1,11 @@
 package day6;
 
 import static io.restassured.RestAssured.*;
+
+import static org.hamcrest.Matchers.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import test_util.HR_ORDS_API_BaseTest;
 
@@ -32,9 +35,33 @@ public class HR_ORDS_ParametrizedTest extends HR_ORDS_API_BaseTest {
                .get("/countries/{country_id}").
        then()
                .log().body()
-               .statusCode(200);
+               .statusCode(200)
+                .body("count", is(1) )
+       ;
 
    }
+
+   @ParameterizedTest
+   @CsvSource({
+           "AR, Argentina",
+           "US, United States of America",
+           "UK, United Kingdom"
+   })
+   public void testSingleCountryWithCSVSource(String countryIdArg, String countryNameArg){
+
+       // SEND request to GET /countries/{country_id}
+       // Expect country name match the corresponding country id
+       given()
+               .log().uri()
+               .pathParam("country_id",countryIdArg ).
+        when()
+                .get("/countries/{country_id}").
+        then()
+               .body("items[0].country_name", is(  countryNameArg  ) )
+        ;
+   }
+
+
 
 
 }
