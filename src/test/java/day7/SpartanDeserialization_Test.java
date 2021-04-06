@@ -60,6 +60,12 @@ public class SpartanDeserialization_Test extends SpartanNoAuthBaseTest {
                 when()
                         .get("/spartans/search").prettyPeek() ;
 
+        // response.as will not work here because we need to provide
+        // path to get to the json objet we want  content[0]
+        JsonPath jp = response.jsonPath() ;
+        SpartanPOJO sp = jp.getObject("content[0]", SpartanPOJO.class );
+        System.out.println("sp = " + sp);
+
     }
 
 
