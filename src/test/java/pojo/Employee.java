@@ -6,7 +6,7 @@ import lombok.*;
 // we just want to represent the Employee data with these fields and ignore any other fields
 @Getter @Setter
 @ToString
-public class Employees {
+public class Employee {
 
     private int employee_id;
     private String first_name;
