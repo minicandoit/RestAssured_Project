@@ -11,6 +11,8 @@ import static org.hamcrest.Matchers.*;
 
 import io.restassured.response.Response;
 
+import java.util.List;
+
 public class SpartanDeserialization_Test extends SpartanNoAuthBaseTest {
 
     // Serialization    : Java Object to Json (or any other type of text|byteStream)
@@ -77,6 +79,29 @@ public class SpartanDeserialization_Test extends SpartanNoAuthBaseTest {
                                 .jsonPath()
                                 .getObject("content[0]", SpartanPOJO.class );
         System.out.println("sp1 = " + sp1);
+
+    }
+
+
+    @DisplayName("GET /spartans/search and save as List<SpartanPOJO>")
+    @Test
+    public void testSearchSaveList(){
+
+        //spartans/search?nameContains=a&gender=Male
+        // send get request to above endpoint and save the json array into List<SpartanPOJO>
+
+        List<SpartanPOJO> lst =  given()
+                                    .queryParam("nameContains", "a")
+                                    .queryParam("gender","Male")
+                                .when()
+                                    .get("/spartans/search")
+                                    .jsonPath()
+                                    .getList("content", SpartanPOJO.class) ;
+                                // something.class return type class to specify what kind of Item you want to have in your list
+        System.out.println("lst = " + lst);
+        lst.forEach( blabla -> System.out.println(blabla) );
+
+
 
     }
 
