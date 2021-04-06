@@ -110,7 +110,8 @@ Two ways we tried to save json result as POJO
    ```
   Here is the [full practice examples](HR_ORDS_API_DeserializationTest.java)
 
-
+Just in case here is the link for HR ORDS Collection
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/55ab4b3f5ab134475f6a?action=collection%2Fimport)
 
 
 
