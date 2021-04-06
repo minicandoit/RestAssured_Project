@@ -35,11 +35,20 @@ public class HR_ORDS_API_DeserializationTest extends HR_ORDS_API_BaseTest {
     @Test
     public void testAllCountries(){
 
-        Country c1 = new Country("AR","Argentina", 1) ;
-        System.out.println("c1 = " + c1);
+//        Country c1 = new Country("AR","Argentina", 1) ;
+//        System.out.println("c1 = " + c1);
 
         // Save 3rd country as Country POJO
+        Country thirdCountry = get("/countries").jsonPath()
+                .getObject("items[2]", Country.class) ;
+        System.out.println("thirdCountry = " + thirdCountry);
+
+
         // Save all countries as List<POJO>
+        List<Country> allCountries = get("/countries").jsonPath()
+                                    .getList("items", Country.class) ;
+
+        allCountries.forEach(p-> System.out.println(p) );
 
 
 
