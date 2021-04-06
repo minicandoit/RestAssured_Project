@@ -3,6 +3,10 @@ package day7;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pojo.Movie;
+import pojo.Rating;
+
+import java.util.List;
+
 import static io.restassured.RestAssured.*;
 public class MovieAPI_PracticeTest {
 
@@ -20,7 +24,7 @@ public class MovieAPI_PracticeTest {
         Movie m1 =  given()
                         .baseUri("http://www.omdbapi.com")
                         .queryParam("apikey","5b5d0fe8")
-                        .queryParam("t","Superman").
+                        .queryParam("t","Avenger").
                     when()
                         .get()
 //                        .jsonPath()
@@ -35,6 +39,16 @@ public class MovieAPI_PracticeTest {
     @Test
     public void testMovieRatingToPOJO(){
 
+        List<Rating> allRatings = given()
+                                    .baseUri("http://www.omdbapi.com")
+                                    .queryParam("apikey","Your key")
+                                    .queryParam("t","Avenger").
+                                when()
+                                     .get()
+                                     .jsonPath()
+                                     .getList("Ratings", Rating.class)
+                                ;
+        System.out.println("allRatings = " + allRatings);
 
 
     }
