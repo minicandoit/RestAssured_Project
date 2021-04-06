@@ -45,5 +45,23 @@ public class SpartanDeserialization_Test extends SpartanNoAuthBaseTest {
 
     }
 
+    @DisplayName("GET /spartans/search")
+    @Test
+    public void testSearch(){
+
+        ///spartans/search?nameContains=a&gender=Male
+        // send get request to above endpoint and save first object with type SpartanPOJO
+
+        Response response =
+                given()
+                        .log().uri()
+                        .queryParam("nameContains", "a")
+                        .queryParam("gender", "Male").
+                when()
+                        .get("/spartans/search").prettyPeek() ;
+
+    }
+
+
 
 }
