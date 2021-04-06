@@ -3,6 +3,7 @@ package day7;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pojo.Country;
+import pojo.Employee;
 import pojo.Region;
 import test_util.HR_ORDS_API_BaseTest;
 
@@ -51,9 +52,22 @@ public class HR_ORDS_API_DeserializationTest extends HR_ORDS_API_BaseTest {
         allCountries.forEach(p-> System.out.println(p) );
 
 
-
-
     }
+
+    // We want to create pojo that represent Employee data
+    // We only care about employee_id , first_name , last_name , salary, department_id
+    // we want to save the json data as pojo and we want to ignore any other fields other than specified above
+    @DisplayName("GET /employees")
+    @Test
+    public void testAllEmployees(){
+
+        // get the first employee and save it into employee pojo
+        Employee e1 = get("/employees").jsonPath()
+                        .getObject("items[0]" , Employee.class)  ;
+        System.out.println("e1 = " + e1);
+    }
+
+
 
 
 }
