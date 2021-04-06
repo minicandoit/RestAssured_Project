@@ -2,6 +2,7 @@ package day7;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pojo.Country;
 import pojo.Region;
 import test_util.HR_ORDS_API_BaseTest;
 
@@ -27,6 +28,21 @@ public class HR_ORDS_API_DeserializationTest extends HR_ORDS_API_BaseTest {
                         .getList("items" , Region.class) ;
 
         System.out.println("allRegions = " + allRegions);
+
+    }
+
+    @DisplayName("GET /Countries")
+    @Test
+    public void testAllCountries(){
+
+        Country c1 = new Country("AR","Argentina", 1) ;
+        System.out.println("c1 = " + c1);
+
+        // Save 3rd country as Country POJO
+        // Save all countries as List<POJO>
+
+
+
 
     }
 
