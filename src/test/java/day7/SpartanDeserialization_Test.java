@@ -1,6 +1,7 @@
 package day7;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import test_util.SpartanNoAuthBaseTest;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,6 +15,7 @@ public class SpartanDeserialization_Test extends SpartanNoAuthBaseTest {
     // De-Serialization : Json(text) to Java
 
     @DisplayName("GET /spartans/{id}")
+    @Test
     public void testGetOneData(){
 
 
