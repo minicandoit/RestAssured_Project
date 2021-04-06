@@ -19,14 +19,23 @@ public class MovieAPI_PracticeTest {
 
         Movie m1 =  given()
                         .baseUri("http://www.omdbapi.com")
-                        .queryParam("apikey","YOUR OWN KEY HERE")
+                        .queryParam("apikey","5b5d0fe8")
                         .queryParam("t","Superman").
                     when()
                         .get()
-                        .jsonPath()
-                        .getObject("",Movie.class)
+//                        .jsonPath()
+//                        .getObject("",Movie.class)
+                        .as(Movie.class)
                 ;
         System.out.println("m1 = " + m1);
+
+    }
+
+    @DisplayName("GET Search for avenger and save Ratings field into List<Rating>")
+    @Test
+    public void testMovieRatingToPOJO(){
+
+
 
     }
 
