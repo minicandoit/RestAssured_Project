@@ -113,6 +113,182 @@ Two ways we tried to save json result as POJO
 Just in case here is the link for HR ORDS Collection
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/55ab4b3f5ab134475f6a?action=collection%2Fimport)
 
+## Useful Jackson Library annotations 
+
+* @JsonIgnoreProperties(ignoreUnknown=true)
+```java
+// we just want to represent the Employee data with these fields and ignore any other fields
+@Getter @Setter
+@ToString
+// we want to ignore any json field that does not match below pojo class fields
+@JsonIgnoreProperties(ignoreUnknown = true)
+
+public class Employee {
+
+    private int employee_id;
+    private String first_name;
+    private String last_name;
+    private int salary;
+    private int department_id;
+
+}
+```
+* @JsonProperties("Your Json Field Name goes here")
+This is the json object 
+```json
+{
+    "department_id": 10,
+    "department_name": "Administration",
+    "manager_id": 200,
+    "location_id": 1700
+}
+```
+This is the POJO we want to use to save above json 
+```java
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
+
+@Getter @Setter
+@ToString
+
+public class Department {
+    // instructing jackson to bind json field called department_id to below java field
+    @JsonProperty("department_id")
+    private int departmentId;  //json field : department_id
+
+    @JsonProperty("department_name")
+    private String name;       //json field : department_name
+    private int manager_id;
+    private  int location_id;
+
+}
+```
+
+You can also have POJO field inside another POJO 
+for example given below Json 
+```json
+{
+    "Title": "Avenger",
+    "Year": "2006",
+    "Released": "09 Apr 2006",
+    "Language": "English",
+    "Ratings": [
+        {
+            "Source": "Internet Movie Database",
+            "Value": "5.7/10"
+        },
+        {
+            "Source": "Rotten Tomatoes",
+            "Value": "29%"
+        }
+    ]
+}
+```
+We can represent the whole json Object as `Movie` POJO , 
+We can represent `Ratings` Json Array as `List<Rating>` so the pojo can be as below 
+
+* Rating POJO class
+```java
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
+
+@Getter
+@Setter
+@ToString
+public class Rating {
+    @JsonProperty("Source")
+    private String source;
+    @JsonProperty("Value")
+    private String value;
+}
+```
+* Movie POJO class
+```java
+import lombok.*;
+
+import java.util.List;
+
+@Getter @Setter
+@ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Movie {
+
+    @JsonProperty("Title")
+    private String title ;
+    @JsonProperty("Year")
+    private int year ;
+    @JsonProperty("Released")
+    private String released ;
+    @JsonProperty("Language")
+    private String language ;
+
+    @JsonProperty("Ratings")
+    private List<Rating> allRatings ;
+
+}
+```
+
+Jackson library will take care of all the conversion whenever it can. 
+
+
+Breaking bad example : 
+```json
+    {
+        "char_id": 1,
+        "name": "Walter White",
+        "occupation": [
+            "High School Chemistry Teacher",
+            "Meth King Pin"
+        ],
+        "nickname": "Heisenberg",
+        "appearance": [
+            1,
+            2,
+            3,
+            4,
+            5
+        ]
+    }
+```
+This can be represented in Character POJO below 
+```java
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
+
+import java.util.List;
+
+@Getter @Setter
+@ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Character {
+
+    @JsonProperty("char_id")
+    private int character_id ;
+    private String name ;
+    private List<String> occupation ;
+    private String nickname ;
+    private List<Integer> appearance ;
+}
+```
+Saving it into List<Character> and printing will generate result like below 
+```
+Character(character_id=1, name=Walter White, occupation=[High School Chemistry Teacher, Meth King Pin], nickname=Heisenberg, appearance=[1, 2, 3, 4, 5])
+Character(character_id=2, name=Jesse Pinkman, occupation=[Meth Dealer], nickname=Cap n' Cook, appearance=[1, 2, 3, 4, 5])
+Character(character_id=3, name=Skyler White, occupation=[House wife, Book Keeper, Car Wash Manager, Taxi Dispatcher], nickname=Sky, appearance=[1, 2, 3, 4, 5])
+Character(character_id=4, name=Walter White Jr., occupation=[Teenager], nickname=Flynn, appearance=[1, 2, 3, 4, 5])
+...
+```
+> OPTIONALLY Advanced JsonPath with Groovy example can be found here
+
+[Rest Assured Doc for below example](https://github.com/rest-assured/rest-assured/wiki/Usage#example-3---complex-parsing-and-validation)
+
+[Advance JsonPath with groovy example](https://github.com/Cybertek-B20/RestAssured_B20/blob/master/src/test/java/day09/AdvancedJsonPathWithGroovy.java)
+
+
+
+
+
 
 
 
