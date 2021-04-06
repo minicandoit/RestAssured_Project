@@ -2,7 +2,8 @@ package day7;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
+import pojo.Movie;
+import static io.restassured.RestAssured.*;
 public class MovieAPI_PracticeTest {
 
 
@@ -16,7 +17,16 @@ public class MovieAPI_PracticeTest {
     @Test
     public void testMovieToPOJO(){
 
-
+        Movie m1 =  given()
+                        .baseUri("http://www.omdbapi.com")
+                        .queryParam("apikey","YOUR OWN KEY HERE")
+                        .queryParam("t","Superman").
+                    when()
+                        .get()
+                        .jsonPath()
+                        .getObject("",Movie.class)
+                ;
+        System.out.println("m1 = " + m1);
 
     }
 
