@@ -71,6 +71,10 @@ public class HR_ORDS_API_DB_Test extends HR_ORDS_API_BaseTest {
 
 
     }
+    // HOMEWORK : RUN QUERY  runQuery("SELECT * FROM REGIONS") save result as List of Map
+    // Write a method to return above List of Map called getAllRegionListOfMap
+    // Write a parameterized Test for GET /regions/{region_id}
+    // Use getAllRegionListOfMap method as Method Source for your Parameterized Test
 
 
 
