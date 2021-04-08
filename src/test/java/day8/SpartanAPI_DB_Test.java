@@ -120,7 +120,12 @@ public class SpartanAPI_DB_Test extends SpartanNoAuthBaseTest {
 
 
     }
+    // AS HOMEWORK  GET /spartans/search
+    // search for nameContains a and Female
+    // compare DB Result total count with API Result total count
+    // SELECT * FROM SPARTANS WHERE LOWER(NAME) LIKE '%a%' and GENDER = 'Female'
 
+    // Make sure all your data in json array match exact criteria above (nameContains a and Female
 
 
 
