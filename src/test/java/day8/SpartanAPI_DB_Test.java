@@ -2,6 +2,7 @@ package day8;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pojo.SpartanPOJO;
 import test_util.ConfigurationReader;
 import test_util.DB_Utility;
 import test_util.SpartanNoAuthBaseTest;
@@ -9,6 +10,7 @@ import test_util.SpartanNoAuthBaseTest;
 import java.util.Map;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class SpartanAPI_DB_Test extends SpartanNoAuthBaseTest {
@@ -57,12 +59,34 @@ public class SpartanAPI_DB_Test extends SpartanNoAuthBaseTest {
                 .body("id" , is(spartanIdToCheck)  )
                 .body("name" ,  is( firstRowMap.get("NAME") )    )
                 .body("gender" , is (firstRowMap.get("GENDER") ) )
-                .body("phone" , is ( Integer.parseInt(firstRowMap.get("PHONE") )   ) )
-
+                // phone jsonpath here is returning int if number fall into the range of int and long if the number fall into range of long
+                // in order to make sure the type match , you need to make sure both side is long or int
+                // easy way to make sure this phone jsonPath always return long is
+                // using groovy method called toLong() to get long at all times
+                .body("phone.toLong()" , is ( Long.parseLong(firstRowMap.get("PHONE") )   ) )
 
         ;
 
+    }
 
+
+    @DisplayName("Test GET /spartans/{id} match DB Data with POJO")
+    @Test
+    public void testGetSingleSpartanResponsePOJO_MatchDB_Result(){
+
+        int spartanIdToCheck = 8003 ;
+
+        DB_Utility.runQuery("SELECT * FROM SPARTANS WHERE SPARTAN_ID = " + spartanIdToCheck ) ;
+        Map<String,String> expectedResultMap = DB_Utility.getRowMap(1) ;
+
+        SpartanPOJO actualResultInPojo =  given()
+                                            .pathParam("id" , spartanIdToCheck).
+                                          when()
+                                            .get("/spartans/{id}")
+                                            .as(SpartanPOJO.class) ;
+        System.out.println("actualResultInPojo = " + actualResultInPojo);
+
+        assertThat( actualResultInPojo.getId() , is (spartanIdToCheck) ) ;
 
 
     }
