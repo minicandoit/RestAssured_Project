@@ -34,6 +34,14 @@ public class FormulaOneAPI_Test {
         List<Driver> allDriver = jp.getList("MRData.DriverTable.Drivers" , Driver.class) ;
         System.out.println("allDriver = " + allDriver);
 
+        // Print the name of all American drivers in this list
+        for (Driver driver : allDriver) {
+            if(driver.getNationality().equals("American")){
+                System.out.println("driver.getGivenName() = " + driver.getGivenName());
+            }
+        }
+
+
 
 
     }
