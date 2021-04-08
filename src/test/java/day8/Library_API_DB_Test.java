@@ -34,14 +34,10 @@ public class Library_API_DB_Test extends LibraryAppBaseTest {
         then()
                 .log().body()
                 .statusCode(200)
-                .body("book_count" , is(expectedBookCount) )
+                .body("book_count" , is(expectedBookCount )  )
                 .body("borrowed_books" , is(expectedBorrowedBookCount) )
                 .body("users", is(expectedUserCount))
-
                 ;
-
-
-
 /*
 {
     "book_count": "2943",
@@ -50,7 +46,22 @@ public class Library_API_DB_Test extends LibraryAppBaseTest {
 }
  */
 
+    // in previous version of RestAssured the given when then style
+        // was actually written in given expect when format
+        // it will assert all the result and give one answer and does not fail whole thing if first one fail
+        // this will show the all 3 failure in the error stacktrace
+        given()
+                .header("X-LIBRARY-TOKEN", librarianToken).
+        expect()
+                .log().body()
+                .statusCode(200)
+                .body("book_count" , is(expectedBookCount + 123 )   )
+                .body("borrowed_books" , is(expectedBorrowedBookCount + 123) )
+                .body("users", is(expectedUserCount + 123 )).
+         when()
+                .get("/dashboard_stats")
 
+        ;
 
 
 
