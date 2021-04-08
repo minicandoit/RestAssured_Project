@@ -1,11 +1,13 @@
 package day8;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pojo.Region;
 import test_util.DB_Utility;
 import test_util.HR_ORDS_API_BaseTest;
 
 import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -41,11 +43,22 @@ public class HR_ORDS_API_DB_Test extends HR_ORDS_API_BaseTest {
         assertThat( r1.getRegion_name() , is(   firstRowAsExpectedList.get(1)  ) );
 
 
+    }
 
+    @DisplayName("Test GET /regions and compare with expected DB Result")
+    @Test
+    public void testAllRegionsWithDB(){
+
+        runQuery("SELECT * FROM REGIONS") ;
+        // Saving all rows into List of Map
+        List<Map<String,String>> expectedRowMapList = getAllRowAsListOfMap() ;
+        System.out.println("expectedRowMapList = " + expectedRowMapList);
 
 
 
     }
+
+
 
 
 }
