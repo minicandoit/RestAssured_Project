@@ -54,6 +54,20 @@ public class HR_ORDS_API_DB_Test extends HR_ORDS_API_BaseTest {
         List<Map<String,String>> expectedRowMapList = getAllRowAsListOfMap() ;
         System.out.println("expectedRowMapList = " + expectedRowMapList);
 
+        List<Region> allRegionsPojoLst = get("/regions")
+                                        .jsonPath().getList("items", Region.class) ;
+        System.out.println("allRegionsPojoLst = " + allRegionsPojoLst);
+
+        assertThat( expectedRowMapList.size()  , equalTo(  allRegionsPojoLst.size()  )   );
+
+        for (int i = 0; i < expectedRowMapList.size()  ; i++) {
+            // compare each region id and region name match the expected region id and name
+            assertThat( allRegionsPojoLst.get(i).getRegion_id() ,
+                        is(  Integer.parseInt(expectedRowMapList.get(i).get("REGION_ID") ) )  ) ;
+
+            assertThat( allRegionsPojoLst.get(i).getRegion_name() , is( expectedRowMapList.get(i).get("REGION_NAME")  )   );
+
+        }
 
 
     }
