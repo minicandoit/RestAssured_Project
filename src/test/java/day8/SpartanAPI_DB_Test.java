@@ -74,7 +74,7 @@ public class SpartanAPI_DB_Test extends SpartanNoAuthBaseTest {
     @Test
     public void testGetSingleSpartanResponsePOJO_MatchDB_Result(){
 
-        int spartanIdToCheck = 8003 ;
+        int spartanIdToCheck = 8005 ;
 
         DB_Utility.runQuery("SELECT * FROM SPARTANS WHERE SPARTAN_ID = " + spartanIdToCheck ) ;
         Map<String,String> expectedResultMap = DB_Utility.getRowMap(1) ;
@@ -87,6 +87,10 @@ public class SpartanAPI_DB_Test extends SpartanNoAuthBaseTest {
         System.out.println("actualResultInPojo = " + actualResultInPojo);
 
         assertThat( actualResultInPojo.getId() , is (spartanIdToCheck) ) ;
+        assertThat( actualResultInPojo.getName() , is ( expectedResultMap.get("NAME") )    );
+        assertThat( actualResultInPojo.getGender() , is ( expectedResultMap.get("GENDER") )    );
+        assertThat(actualResultInPojo.getPhone() ,  is(  Long.parseLong( expectedResultMap.get("PHONE"))   )   );
+
 
 
     }
