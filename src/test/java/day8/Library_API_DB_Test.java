@@ -63,7 +63,10 @@ public class Library_API_DB_Test extends LibraryAppBaseTest {
 
         ;
 
-
+        // if you wanted do this separately after getting response object like day 1
+        // and see all your assertion result no matter any of them failed or not
+        // here is how
+        // https://junit.org/junit5/docs/current/user-guide/#writing-tests-assertions
 
     }
 
