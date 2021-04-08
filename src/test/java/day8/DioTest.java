@@ -26,6 +26,7 @@ public class DioTest {
     public void testDioPOJO(){
 
         String requestURL = "https://e94d0713-391b-4218-906d-66e9614ea580.mock.pstmn.io/dio" ;
+        // productionURL = "https://myawesomedio.com/dio"
 
         Dog dio = get(requestURL).as(Dog.class) ;
         System.out.println("dio = " + dio);
