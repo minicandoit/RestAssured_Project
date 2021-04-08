@@ -6,6 +6,11 @@ import test_util.ConfigurationReader;
 import test_util.DB_Utility;
 import test_util.SpartanNoAuthBaseTest;
 
+import java.util.Map;
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+
 public class SpartanAPI_DB_Test extends SpartanNoAuthBaseTest {
 
 
@@ -32,6 +37,26 @@ public class SpartanAPI_DB_Test extends SpartanNoAuthBaseTest {
 
         // we want to test spartan with ID of 8003 , api response json match database data
         // RUN QUERY  SELECT * FROM SPARTANS WHERE SPARTAN_ID = 8003
+        int spartanIdToCheck = 8003 ;
+
+        DB_Utility.runQuery("SELECT * FROM SPARTANS WHERE SPARTAN_ID = " + spartanIdToCheck ) ;
+        DB_Utility.displayAllData();
+
+        Map<String,String> firstRowMap = DB_Utility.getRowMap(1) ;
+        System.out.println("expected api response data we will use  = \n" + firstRowMap);
+
+        // send api request
+        given()
+                .pathParam("id" , spartanIdToCheck)
+                .log().uri().
+        when()
+                .get("/spartans/{id}").
+        then()
+                .log().all()
+                .statusCode(200)
+                .body("id" , is(spartanIdToCheck)  )
+        ;
+
 
 
 
