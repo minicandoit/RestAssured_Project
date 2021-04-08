@@ -9,7 +9,7 @@ public class HR_ORDS_API_BaseTest {
 
     @BeforeAll
     public static void init(){
-        baseURI = "http://18.235.32.166:1000";
+        baseURI = ConfigurationReader.getProperty("hr.ords.baseuri");
         basePath = "/ords/hr/api" ;
 
         String url = ConfigurationReader.getProperty("hr.database.url");
