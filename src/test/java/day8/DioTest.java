@@ -1,6 +1,6 @@
 package day8;
 
-import io.restassured.RestAssured;
+import static io.restassured.RestAssured.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pojo.Dog;
@@ -27,7 +27,7 @@ public class DioTest {
 
         String requestURL = "https://e94d0713-391b-4218-906d-66e9614ea580.mock.pstmn.io/dio" ;
 
-        Dog dio = RestAssured.get(requestURL).as(Dog.class) ;
+        Dog dio = get(requestURL).as(Dog.class) ;
         System.out.println("dio = " + dio);
 
     }
