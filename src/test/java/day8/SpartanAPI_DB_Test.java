@@ -95,5 +95,34 @@ public class SpartanAPI_DB_Test extends SpartanNoAuthBaseTest {
 
     }
 
+    // WHAT IF I WANT TO GET THE ID DYNAMICALLY INSTEAD OF HARCODING 8003
+    @DisplayName("Test GET /spartans/{id} match DB Data with POJO 2")
+    @Test
+    public void testGetSingleSpartanResponsePOJO_MatchDB_Result2(){
+
+        DB_Utility.runQuery("SELECT * FROM SPARTANS") ;
+        Map<String,String> expectedResultMap = DB_Utility.getRowMap(1) ;
+        // get the ID from this map and save it into below variable
+        int spartanIdToCheck =  Integer.parseInt(  expectedResultMap.get("SPARTAN_ID")        )  ;
+
+        SpartanPOJO actualResultInPojo =  given()
+                .pathParam("id" , spartanIdToCheck).
+                        when()
+                .get("/spartans/{id}")
+                .as(SpartanPOJO.class) ;
+        System.out.println("actualResultInPojo = " + actualResultInPojo);
+
+        assertThat( actualResultInPojo.getId() , is (spartanIdToCheck) ) ;
+        assertThat( actualResultInPojo.getName() , is ( expectedResultMap.get("NAME") )    );
+        assertThat( actualResultInPojo.getGender() , is ( expectedResultMap.get("GENDER") )    );
+        assertThat(actualResultInPojo.getPhone() ,  is(  Long.parseLong( expectedResultMap.get("PHONE"))   )   );
+
+
+
+    }
+
+
+
+
 
 }
