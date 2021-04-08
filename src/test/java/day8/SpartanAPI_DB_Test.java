@@ -126,7 +126,7 @@ public class SpartanAPI_DB_Test extends SpartanNoAuthBaseTest {
     // SELECT * FROM SPARTANS WHERE LOWER(NAME) LIKE '%a%' and GENDER = 'Female'
 
     // Make sure all your data in json array match exact criteria above (nameContains a and Female
-
+    // Optionally , Write a parametrized Test with multiple different search criteria
 
 
 
