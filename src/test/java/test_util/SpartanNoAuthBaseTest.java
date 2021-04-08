@@ -11,7 +11,7 @@ public abstract class SpartanNoAuthBaseTest {
         // as a homework , put these information
         // in configurations.properties file
         // this will set the part of URL at RestAssured
-        RestAssured.baseURI     = "http://18.235.32.166:8000"  ;
+        RestAssured.baseURI     = ConfigurationReader.getProperty("hr.ords.baseuri")  ;
 //        RestAssured.port = 8000 ;
         RestAssured.basePath    = "/api" ;
 
