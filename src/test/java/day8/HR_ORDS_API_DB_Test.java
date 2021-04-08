@@ -36,9 +36,9 @@ public class HR_ORDS_API_DB_Test extends HR_ORDS_API_BaseTest {
                         .getObject("items[0]", Region.class) ;
         System.out.println("r1 = " + r1);
 
-        //get("/regions/{region_id}" , 1)
         // compare the result
-
+        assertThat( r1.getRegion_id() ,  is(   Integer.parseInt(  firstRowAsExpectedList.get(0)    )   )  );
+        assertThat( r1.getRegion_name() , is(   firstRowAsExpectedList.get(1)  ) );
 
 
 
