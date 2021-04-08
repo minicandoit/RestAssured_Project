@@ -9,6 +9,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pojo.Driver;
 
+import java.util.List;
+
 public class FormulaOneAPI_Test {
 
     @BeforeAll
@@ -29,6 +31,8 @@ public class FormulaOneAPI_Test {
         System.out.println("d1 = " + d1);
 
         // Get all drivers as List<Driver>
+        List<Driver> allDriver = jp.getList("MRData.DriverTable.Drivers" , Driver.class) ;
+        System.out.println("allDriver = " + allDriver);
 
 
 
