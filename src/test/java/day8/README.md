@@ -88,8 +88,9 @@ Few Steps that we took to set up DB Configuration
   * Send the actual request to the endpoint `GET/spartans/{id}` and compare the body with the data we got from db query. 
  * Repeated same process for HR ORDS API and Library App API. 
 
-Here is the example we did for [HR ORDS API](HR_ORDS_API_DB_Test.java)
-Here is the example we did for [Library App API](Library_API_DB_Test.java)
+- Here is the example we did for [Spartans API](SpartanAPI_DB_Test.java)
+- Here is the example we did for [HR ORDS API](HR_ORDS_API_DB_Test.java)
+- Here is the example we did for [Library App API](Library_API_DB_Test.java)
 
     
 
