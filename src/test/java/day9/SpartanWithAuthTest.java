@@ -31,6 +31,7 @@ public class SpartanWithAuthTest extends SpartanWithAuthBaseTest {
         when()
                 .get("/spartans").
         then()
+                .log().headers()
                 .statusCode(200) ;
 
 
@@ -41,7 +42,30 @@ public class SpartanWithAuthTest extends SpartanWithAuthBaseTest {
     @Test
     public void testEditor(){
 
+        given()
+                .pathParam("id", 100)
+                .auth().basic("editor", "editor").
+        when()
+                .delete("/spartans/{id}").
+        then()
+                .log().all()
+                .statusCode(403)
+                ;
     }
+
+    // As a homework ,write a detailed test for Role base access control (RBAC)
+    /*
+    in Spartan App with auth
+     Admin should be able to take all CRUD
+     Editor should be able to take all CRUD
+        other than Delete
+     User Should be able to only Read Data
+        Should not be able to add , update , delete
+     +
+
+     */
+
+
 
 
 
