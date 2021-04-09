@@ -30,6 +30,8 @@ public class SpartanSearchTest extends SpartanNoAuthBaseTest {
         then()
                 .statusCode(200)
                 .body("totalElement" , equalTo( expectedCount ) )
+                // content jsonpath is pointing to json array , so we can directly check the size using hasSize matcher
+                .body("content" , hasSize( expectedCount)  )
 
         ;
 
