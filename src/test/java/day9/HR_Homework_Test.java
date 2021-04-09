@@ -40,7 +40,36 @@ public class HR_Homework_Test extends HR_ORDS_API_BaseTest {
                 .body("items[0].region_id" , equalTo(expectedRegionID)    )
                 .body("items[0].region_name" , is(expectedRegionName)     )
         ;
+        // here is how one response look like
 
+        /*
+        {
+            "items": [
+                {
+                    "region_id": 1,
+                    "region_name": "Europe"
+                }
+            ],
+            "hasMore": false,
+            "limit": 125,
+            "offset": 0,
+            "count": 1,
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "http://18.235.32.166:1000/ords/hr/api/regions/1"
+                },
+                {
+                    "rel": "describedby",
+                    "href": "http://18.235.32.166:1000/ords/hr/metadata-catalog/api/regions/item"
+                },
+                {
+                    "rel": "first",
+                    "href": "http://18.235.32.166:1000/ords/hr/api/regions/1"
+                }
+            ]
+        }
+         */
 
 
 
