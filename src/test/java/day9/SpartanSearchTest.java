@@ -15,9 +15,9 @@ public class SpartanSearchTest extends SpartanNoAuthBaseTest {
         // compare the count with DB result
         String query = "SELECT * FROM SPARTANS WHERE LOWER(NAME) LIKE '%a%' and GENDER = 'Female'" ;
         DB_Utility.runQuery(query) ;
-
-        DB_Utility.displayAllData();
-
+//        DB_Utility.displayAllData();
+        int expectedCount = DB_Utility.getRowCount()  ;
+        System.out.println("count = " + expectedCount);
 
 
 
