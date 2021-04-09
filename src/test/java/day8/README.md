@@ -92,7 +92,35 @@ Few Steps that we took to set up DB Configuration
 - Here is the example we did for [HR ORDS API](HR_ORDS_API_DB_Test.java)
 - Here is the example we did for [Library App API](Library_API_DB_Test.java)
 
-    
+
+# RestAssured method chain style 
+
+Common style of method chaining in newer versions
+```
+given().
+   all request related info goes here 
+when() 
+   send request here 
+then() 
+   assert here , it will fail as fast as first assertion fails 
+```
+
+Older style with expect , which evaluate all assertions 
+
+```
+given(). 
+  all request related info goes here 
+expect().
+  all assertions expectation goes here
+when(). 
+  send request here 
+```
+This will not immediately fail until all assertions has been evaluated. 
+
+
+JUnit 5 Also has concept of soft assertion using `assertAll`   
+Here is the [full doc](https://junit.org/junit5/docs/current/user-guide/#writing-tests-assertions)
+
 
 
 
