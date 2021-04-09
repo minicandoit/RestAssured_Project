@@ -8,6 +8,9 @@ import test_util.HR_ORDS_API_BaseTest;
 import java.util.List;
 import java.util.Map;
 
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+
 public class HR_Homework_Test extends HR_ORDS_API_BaseTest {
 
     /*
@@ -22,6 +25,24 @@ public class HR_Homework_Test extends HR_ORDS_API_BaseTest {
     public void testAllRegions( Map<String,String> rowMapArg  ){
 
         System.out.println("rowMapArg = " + rowMapArg);
+
+        //SEND GET /regions/{region_id} and assert the data match database data we got from method source
+        int expectedRegionID = Integer.parseInt( rowMapArg.get("REGION_ID") ) ;
+        String expectedRegionName =  rowMapArg.get("REGION_NAME") ;
+
+        given()
+                .log().uri()
+                .pathParam("region_id" , expectedRegionID).
+        when()
+                .get("/regions/{region_id}").
+        then()
+                .body("count" , is(1))
+                .body("items[0].region_id" , equalTo(expectedRegionID)    )
+                .body("items[0].region_name" , is(expectedRegionName)     )
+        ;
+
+
+
 
     }
 
