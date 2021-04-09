@@ -3,11 +3,14 @@ package day9;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import test_util.DB_Utility;
 import test_util.LibraryAppBaseTest;
 
 import java.util.Map;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 public class Library_API_DB_Post_Test extends LibraryAppBaseTest {
 
@@ -36,6 +39,17 @@ public class Library_API_DB_Post_Test extends LibraryAppBaseTest {
                             .extract()
                                 .jsonPath().getInt("book_id") ;
         System.out.println("newBookId = " + newBookId);
+
+        DB_Utility.runQuery("SELECT * FROM books where id = " + newBookId ) ;
+//        DB_Utility.displayAllData();
+        Map<String,String> dbResultMap =  DB_Utility.getRowMap(1) ;
+        System.out.println("dbResultMap = " + dbResultMap);
+
+        //randomBookMapBody = {year=1682, author=Myrtis Barrows IV, isbn=71104517, name=Noli Me Tangere, description=There is nothing regular about Chuck Norris' expressions., book_category_id=13}
+        //dbResultMap =       {id=3133, name=Noli Me Tangere, isbn=71104517, year=1682, author=Myrtis Barrows IV, book_category_id=13, description=There is nothing regular about Chuck Norris' expressions., added_date=2021-04-09 18:54:16}
+        assertThat(dbResultMap.get("name") , is(randomBookMapBody.get("name"))   ) ;
+        // keep going and do the rest , or find a better way.
+
     }
 
 
