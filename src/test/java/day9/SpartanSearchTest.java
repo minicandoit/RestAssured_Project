@@ -64,7 +64,14 @@ public class SpartanSearchTest extends SpartanNoAuthBaseTest {
         then()
                 .statusCode(200)
                 .body("totalElement" , equalTo(expectedCount))
+                // OPTIONALLY , continue from here and check
+                // if every item name containsString ignore case what we search for
+                .body("content.name" , everyItem(  containsStringIgnoringCase( nameArg )  )  )
+                //    every item gender is what we search for
+                .body("content.gender" , everyItem(   is( genderArg)    )     )
+
                 ;
+
 
     }
 
