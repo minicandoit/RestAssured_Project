@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.given;
 SEND request to GET http://www.omdbapi.com/?t=Superman&r=xml&apikey=YOUR KEY GOES HERE
 get the movie attribute out from the xml response
 Above is for getting one movie information
-Now Send Separate request to http://www.omdbapi.com/?s=WandaVision&type=series&r=xml&apikey=YOUR KEY GOES HERE
+Now Send Separate request to http://www.omdbapi.com/?s=Superman&type=series&r=xml&apikey=YOUR KEY GOES HERE
 and get all movie titles from this response into the list
  */
 public class MovieAPI_XML_Test {
@@ -41,7 +41,7 @@ public class MovieAPI_XML_Test {
         XmlPath xp = given()
                 .baseUri("http://www.omdbapi.com")
                 .queryParam("apikey","YOUR OWN KEY HERE")
-                .queryParam("s","WandaVision")
+                .queryParam("s","Superman")
                 .queryParam("r","xml").
                         when()
                 .get()
