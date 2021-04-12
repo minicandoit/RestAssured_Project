@@ -20,11 +20,26 @@ public class jsonSchemaValidationTest extends SpartanNoAuthBaseTest {
                 .get("/spartans/{id}").
         then()
                 .log().body()
-                .statusCode(200)
+//                .statusCode(200)
                 // check the response body against
                 // the schema file singleSpartanSchema.json we added under resources folder
                 .body(  matchesJsonSchemaInClasspath("singleSpartanSchema.json")  )
         ;
     }
 
-}
+    @DisplayName("Check GET /spartans json schema")
+    @Test
+    public void testAllSpartansJsonSchema(){
+
+
+        when()
+                .get("/spartans").
+        then()
+                .body(matchesJsonSchemaInClasspath("allSpartansSchema.json")  )
+        ;
+    }
+
+
+
+
+    }
