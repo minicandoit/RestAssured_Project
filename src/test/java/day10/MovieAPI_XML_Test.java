@@ -41,7 +41,7 @@ public class MovieAPI_XML_Test {
         XmlPath xp = given()
                 .baseUri("http://www.omdbapi.com")
                 .queryParam("apikey","YOUR OWN KEY HERE")
-                .queryParam("s","Superman")
+                .queryParam("s","WandaVision")
                 .queryParam("r","xml").
                         when()
                 .get()
