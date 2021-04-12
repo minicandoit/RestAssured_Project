@@ -11,6 +11,7 @@ import java.util.List;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class XML_ResponseTest extends SpartanWithAuthBaseTest {
 
@@ -76,6 +77,29 @@ public class XML_ResponseTest extends SpartanWithAuthBaseTest {
          // get all IDs into String
          List<Integer> allIds = xp.getList("List.item.id") ;
          System.out.println("allIds = " + allIds);
+
+         // assert below in one shot with Junit 5 Assert all
+         /*
+             firstId = 1
+            firstName = Meade
+            thirdPhoneNumber = 6105035231
+            allIds has size of 329
+          */
+
+////         assertAll()
+//          assertEquals( 1 , firstId);
+//         assertEquals( "Meade" , firstName);
+//         assertEquals( 6105035231L , thirdPhoneNumber);
+//         assertEquals( 329 , allIds.size());
+
+         assertAll(
+                 ()-> assertEquals( 1 , firstId) ,
+                 ()->assertEquals( "Meade" , firstName),
+                 ()-> assertEquals( 6105035231L , thirdPhoneNumber) ,
+                 ()-> assertEquals( 329 , allIds.size())
+         ) ;
+
+
 
      }
 
