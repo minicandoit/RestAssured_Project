@@ -4,8 +4,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import test_util.SpartanNoAuthBaseTest;
+
+import java.io.File;
+
 import static io.restassured.RestAssured.*;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 public class jsonSchemaValidationTest extends SpartanNoAuthBaseTest {
 
@@ -36,6 +39,10 @@ public class jsonSchemaValidationTest extends SpartanNoAuthBaseTest {
                 .get("/spartans").
         then()
                 .body(matchesJsonSchemaInClasspath("allSpartansSchema.json")  )
+                // what if this schema file was under day 10 package
+                .body(matchesJsonSchema( new File("src/test/java/day10/allSpartansSchema.json")   ))
+
+
         ;
     }
 
