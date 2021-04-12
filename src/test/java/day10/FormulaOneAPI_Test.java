@@ -1,5 +1,6 @@
 package day10;
 
+import io.restassured.path.xml.XmlPath;
 import org.junit.jupiter.api.*;
 
 import static io.restassured.RestAssured.*;
@@ -18,6 +19,18 @@ public class FormulaOneAPI_Test {
     @DisplayName("Test GET /drivers/{driver_id}")
     @Test
     public void testDriverOne(){
+
+        // send request to get information of driver_id alonso and save  xml result and assert or assert in the chain
+        XmlPath xp = given()
+                        .pathParam("driver_id","alonso").
+                     when()
+                        .get("/drivers/{driver_id}")
+                        .xmlPath() ;
+
+        String givenName =  xp.getString("MRData.DriverTable.Driver.GivenName") ;
+        System.out.println("givenName = " + givenName);
+        String familyName =  xp.getString("MRData.DriverTable.Driver.FamilyName") ;
+        System.out.println("familyName = " + familyName);
 
 
     }
