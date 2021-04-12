@@ -3,6 +3,8 @@ package day10;
 import io.restassured.path.xml.XmlPath;
 import org.junit.jupiter.api.*;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -34,6 +36,24 @@ public class FormulaOneAPI_Test {
 
 
     }
+
+    @DisplayName("Test GET /drivers")
+    @Test
+    public void testAllDrivers(){
+
+        XmlPath xp = get("/drivers").xmlPath() ;
+        // get first given name
+        String firstGivenName = xp.getString("MRData.DriverTable.Driver[0].GivenName");
+        System.out.println("firstGivenName = " + firstGivenName);
+        // get third nationality
+        String thirdNationality = xp.getString("MRData.DriverTable.Driver[2].Nationality");
+        System.out.println("thirdNationality = " + thirdNationality);
+        // get all last names
+        List<String> allLastNames = xp.getList("MRData.DriverTable.Driver.FamilyName") ;
+        System.out.println("allLastNames = " + allLastNames);
+
+    }
+
 
 
     @AfterAll
