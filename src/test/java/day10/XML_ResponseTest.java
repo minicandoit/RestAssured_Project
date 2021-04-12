@@ -7,6 +7,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import test_util.SpartanWithAuthBaseTest;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
@@ -71,6 +73,9 @@ public class XML_ResponseTest extends SpartanWithAuthBaseTest {
          long thirdPhoneNumber = xp.getLong("List.item[2].phone") ;
          System.out.println("thirdPhoneNumber = " + thirdPhoneNumber);
 
+         // get all IDs into String
+         List<Integer> allIds = xp.getList("List.item.id") ;
+         System.out.println("allIds = " + allIds);
 
      }
 
