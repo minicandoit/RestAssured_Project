@@ -49,10 +49,30 @@ public class FormulaOneAPI_Test {
         String thirdNationality = xp.getString("MRData.DriverTable.Driver[2].Nationality");
         System.out.println("thirdNationality = " + thirdNationality);
         // get all last names
-        List<String> allLastNames = xp.getList("MRData.DriverTable.Driver.FamilyName") ;
+        List<String> allLastNames = xp.getList("MRData.DriverTable.Driver.FamilyName", String.class) ;
         System.out.println("allLastNames = " + allLastNames);
 
     }
+
+    // getting attributes out of xml element
+    @DisplayName("Test GET /drivers/{driver_id} get attributes ")
+    @Test
+    public void testDriverOneAttribute() {
+
+        // send request to get information of driver_id alonso and save  xml result and assert or assert in the chain
+        XmlPath xp = given()
+                .pathParam("driver_id", "alonso").
+                        when()
+                .get("/drivers/{driver_id}")
+                .xmlPath();
+
+    }
+
+
+
+
+
+
 
 
 
