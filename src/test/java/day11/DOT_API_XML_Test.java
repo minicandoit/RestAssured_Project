@@ -1,7 +1,6 @@
 package day11 ;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import io.restassured.path.xml.XmlPath;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,9 +19,49 @@ public class DOT_API_XML_Test {
     first Make_ID is  474 , Make_Name Honda
      */
 
-    @DisplayName("XML Test with Vehicles API")
+    @BeforeAll
+    public static void init(){
+        baseURI = "https://vpic.nhtsa.dot.gov" ;
+        basePath = "/api/vehicles" ;
+    }
+    @AfterAll
+    public static void cleanup(){
+        reset();
+    }
+
+    @DisplayName("XML Test with Vehicles API GET /GetMakeForManufacturer/988?format=xml")
     @Test
     public void testHonda(){
+         // what we did yesterday without checking status code
+        /*
+        XmlPath xp =
+        given()
+                .queryParam("format","xml").
+        when()
+                .get("/GetMakeForManufacturer/988")
+                .xmlPath();
+         */
+
+        // check status code then extract xmlPath
+        XmlPath xp =
+        given()
+                .queryParam("format","xml").
+        when()
+                .get("/GetMakeForManufacturer/988").
+        then()
+                .statusCode(200)
+                .log().body().
+            extract()
+                .xmlPath()
+                ;
+
+//        count element text is 2
+        int countElementText =  xp.getInt("Response.count") ;
+        System.out.println("countElementText = " + countElementText);
+
+//    message Results returned successfully
+//    first Make_ID is  474 , Make_Name Honda
+
 
 
 
