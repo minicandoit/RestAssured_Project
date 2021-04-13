@@ -56,10 +56,12 @@ public class DOT_API_XML_Test {
                 ;
 
 //        count element text is 2
-        int countElementText =  xp.getInt("Response.count") ;
+        int countElementText =  xp.getInt("Response.Count") ;
         System.out.println("countElementText = " + countElementText);
 
 //    message Results returned successfully
+        String message = xp.getString("Response.Message") ;
+        System.out.println("message = " + message);
 //    first Make_ID is  474 , Make_Name Honda
 
 
