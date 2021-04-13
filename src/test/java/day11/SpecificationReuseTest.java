@@ -32,6 +32,26 @@ public class SpecificationReuseTest extends SpartanWithAuthBaseTest {
                 .contentType(ContentType.JSON) ;
     }
 
+    @DisplayName("Admin GET /spartans/{id} and expect 200 and json , expect id match ")
+    @Test
+    public void testAdminGetOne(){
+
+        given()
+                .auth().basic("admin","admin")
+                .pathParam("id",1).
+        when()
+                .get("/spartans/{id}").
+        then()
+                .log().body()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("id", is(1))
+        ;
 
 
-}
+    }
+
+
+
+
+    }
