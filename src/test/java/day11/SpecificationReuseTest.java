@@ -1,5 +1,6 @@
 package day11;
 
+import io.restassured.http.ContentType;
 import test_util.SpartanWithAuthBaseTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,14 @@ public class SpecificationReuseTest extends SpartanWithAuthBaseTest {
     @Test
     public void testAdminGetAll(){
 
-
+        given()
+                .auth().basic("admin","admin")
+                .accept(ContentType.JSON).
+        when()
+                .get("/spartans").
+        then()
+                .statusCode(200)
+                .contentType(ContentType.JSON) ;
     }
 
 
