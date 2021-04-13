@@ -2,11 +2,12 @@ package day11;
 
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import test_util.LibraryAppBaseTest;
 
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 
 public class ReusableSpecLibraryAppTest extends LibraryAppBaseTest {
 
@@ -36,7 +37,9 @@ public class ReusableSpecLibraryAppTest extends LibraryAppBaseTest {
                 .get("/get_all_users").
         then()
                 .spec(libraryResponseSpec)
-                ;
+                // check status code using reusable response specification method we build
+                //.spec( getDynamicResponseSpec(200)  )
+        ;
         // in class task
         // use the Reusable request specification
         // we build to send the request to get all users
@@ -52,6 +55,16 @@ public class ReusableSpecLibraryAppTest extends LibraryAppBaseTest {
 
 
     }
+
+    //  OPTIONALLY ,  I want to have a reusable specification that I can dynamically build
+    // by providing value externally ,
+    // as a simple example , I want to status code 200 sometimes and 204 sometimes
+    public static ResponseSpecification getDynamicResponseSpec(int statusCode){
+
+        return  expect().statusCode(statusCode) ;
+
+    }
+
 
 
 
