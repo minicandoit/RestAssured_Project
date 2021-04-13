@@ -13,6 +13,13 @@ import static org.hamcrest.Matchers.*;
 
 public class SpecificationReuseTest extends SpartanWithAuthBaseTest {
 
+    private static RequestSpecification requestSpec = given()
+                                                    .auth().basic("admin", "admin")
+                                                    .accept(ContentType.JSON);
+
+    private static ResponseSpecification responseSpec = expect()
+                                                    .statusCode(200)
+                                                    .contentType(ContentType.JSON);
 
     // all test in this class class will use admin credentials
     // all tests in this class will expect json result from response
@@ -24,13 +31,9 @@ public class SpecificationReuseTest extends SpartanWithAuthBaseTest {
     @Test
     public void testAdminGetAll(){
 
-        RequestSpecification requestSpec = given()
-                                            .auth().basic("admin", "admin")
-                                            .accept(ContentType.JSON);
 
-        ResponseSpecification responseSpec = expect()
-                                                .statusCode(200)
-                                                .contentType(ContentType.JSON);
+
+
 
 
         given()
