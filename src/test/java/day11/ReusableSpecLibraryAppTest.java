@@ -58,7 +58,7 @@ public class ReusableSpecLibraryAppTest extends LibraryAppBaseTest {
 
     //  OPTIONALLY ,  I want to have a reusable specification that I can dynamically build
     // by providing value externally ,
-    // as a simple example , I want to status code 200 sometimes and 204 sometimes
+    // as a simple example , I want to check status code 200 sometimes and 204 sometimes
     public static ResponseSpecification getDynamicResponseSpec(int statusCode){
 
         return  expect().statusCode(statusCode) ;
