@@ -1,5 +1,7 @@
 package day11 ;
 
+
+
 import org.junit.jupiter.api.*;
 import io.restassured.path.xml.XmlPath;
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +11,8 @@ import java.util.Collections;
 import java.util.List;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class DOT_API_XML_Test {
     /*
@@ -68,13 +72,33 @@ public class DOT_API_XML_Test {
         System.out.println("makeId1 = " + makeId1);
         System.out.println("makeName1 = " + makeName1);
 
-
-
-
+        assertThat( countElementText , is(2) ) ;
+        assertThat(message , is("Results returned successfully") );
+        assertThat( makeId1 , is(474) ) ;
+        assertThat(makeName1 , equalToIgnoringCase("Honda") );
 
 
     }
 
+    @DisplayName("XML Test with Vehicles API in method chain")
+    @Test
+    public void testHondaInMethodChain(){
+
+        given()
+                .queryParam("format","xml").
+        when()
+                .get("/GetMakeForManufacturer/988").
+        then()
+                .log().body()
+                .statusCode(200)
+                .body("Response.Count" , is("2") )
+                .body("Response.Message", is("Results returned successfully"))
+                .body("Response.Results.MakesForMfg[0].Make_ID", is("474"))
+                .body("Response.Results.MakesForMfg[0].Make_Name", is("HONDA"))
+        ;
+
+
+    }
 
 
 
