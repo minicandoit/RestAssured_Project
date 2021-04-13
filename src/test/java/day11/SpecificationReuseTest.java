@@ -31,11 +31,6 @@ public class SpecificationReuseTest extends SpartanWithAuthBaseTest {
     @Test
     public void testAdminGetAll(){
 
-
-
-
-
-
         given()
                 .spec(requestSpec).
         when()
@@ -60,15 +55,17 @@ public class SpecificationReuseTest extends SpartanWithAuthBaseTest {
     public void testAdminGetOne(){
 
         given()
-                .auth().basic("admin","admin")
-                .accept(ContentType.JSON)
+//                .auth().basic("admin","admin")
+//                .accept(ContentType.JSON)
+                .spec( requestSpec )
                 .pathParam("id",1).
         when()
                 .get("/spartans/{id}").
         then()
                 .log().body()
-                .statusCode(200)
-                .contentType(ContentType.JSON)
+                .spec(responseSpec)
+//                .statusCode(200)
+//                .contentType(ContentType.JSON)
                 .body("id", is(1))
         ;
 
