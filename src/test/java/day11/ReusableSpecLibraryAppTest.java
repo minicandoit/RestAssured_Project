@@ -14,17 +14,13 @@ public class ReusableSpecLibraryAppTest extends LibraryAppBaseTest {
     @Test
     public void testDashboardStats(){
 
-        RequestSpecification librarianSpec = given()
-                                .header("x-library-token",librarianToken) ;
-
-
-
         given()
                 .spec(librarianSpec).
         when()
                 .get("/dashboard_stats")
         .then()
                 .statusCode(200)
+                .log().body()
         ;
 
 
