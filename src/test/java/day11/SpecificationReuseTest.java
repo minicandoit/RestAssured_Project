@@ -1,6 +1,8 @@
 package day11;
 
 import io.restassured.http.ContentType;
+import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
 import test_util.SpartanWithAuthBaseTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,14 +24,32 @@ public class SpecificationReuseTest extends SpartanWithAuthBaseTest {
     @Test
     public void testAdminGetAll(){
 
+        RequestSpecification requestSpec = given()
+                                            .auth().basic("admin", "admin")
+                                            .accept(ContentType.JSON);
+
+        ResponseSpecification responseSpec = expect()
+                                                .statusCode(200)
+                                                .contentType(ContentType.JSON);
+
+
         given()
-                .auth().basic("admin","admin")
-                .accept(ContentType.JSON).
+                .spec(requestSpec).
         when()
                 .get("/spartans").
         then()
-                .statusCode(200)
-                .contentType(ContentType.JSON) ;
+                .spec(responseSpec)
+                ;
+
+
+//        given()
+//                .auth().basic("admin","admin")
+//                .accept(ContentType.JSON).
+//        when()
+//                .get("/spartans").
+//        then()
+//                .statusCode(200)
+//                .contentType(ContentType.JSON) ;
     }
 
     @DisplayName("Admin GET /spartans/{id} and expect 200 and json , expect id match ")
@@ -38,6 +58,7 @@ public class SpecificationReuseTest extends SpartanWithAuthBaseTest {
 
         given()
                 .auth().basic("admin","admin")
+                .accept(ContentType.JSON)
                 .pathParam("id",1).
         when()
                 .get("/spartans/{id}").
