@@ -63,6 +63,12 @@ public class DOT_API_XML_Test {
         String message = xp.getString("Response.Message") ;
         System.out.println("message = " + message);
 //    first Make_ID is  474 , Make_Name Honda
+        int makeId1 = xp.getInt("Response.Results.MakesForMfg[0].Make_ID");
+        String makeName1 = xp.getString("Response.Results.MakesForMfg[0].Make_Name");
+        System.out.println("makeId1 = " + makeId1);
+        System.out.println("makeName1 = " + makeName1);
+
+
 
 
 
