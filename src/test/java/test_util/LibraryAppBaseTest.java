@@ -1,8 +1,10 @@
 package test_util;
 
 import com.github.javafaker.Faker;
+import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 
@@ -15,6 +17,7 @@ public class LibraryAppBaseTest {
 
     public static String librarianToken;
     public static RequestSpecification librarianSpec ;
+    public static ResponseSpecification libraryResponseSpec ;
 
     @BeforeAll
     public static void init(){
@@ -25,6 +28,11 @@ public class LibraryAppBaseTest {
 
         librarianSpec = given()
                 .header("x-library-token",librarianToken) ;
+
+        libraryResponseSpec = expect().statusCode(200)
+                            .contentType(ContentType.JSON)
+                            .logDetail(LogDetail.ALL) ;
+
 
         // DB Connection info
         String url = ConfigurationReader.getProperty("library1.database.url");
