@@ -24,6 +24,7 @@ public class SpartanPostSchemaTest extends SpartanWithAuthBaseTest {
         System.out.println("bodyPOJO = " + bodyPOJO);
 
         given()
+               .log().body()
                .auth().basic("admin","admin")
                .contentType(ContentType.JSON)
                .body(bodyPOJO).
@@ -32,8 +33,15 @@ public class SpartanPostSchemaTest extends SpartanWithAuthBaseTest {
         then()
                 .statusCode(201)
                 .log().all()
-                .body(matchesJsonSchemaInClasspath("spartanPostJsonSchema.json") ) ;
+                .body(matchesJsonSchemaInClasspath("spartanPostJsonSchema.json") )
+                .body(matchesJsonSchema(new File("src/test/resources/spartanPostJsonSchema.json")));
+        ;
+        // if the schema file is in different location (anywhere other than resources folder)
+        // then we use matchesJsonSchema ( new File("Your full path goes here"))
 
+        // as a homework
+        // try to store the request spec into reusable variable
+        // try to add the body validation into response spec
 
     }
 
