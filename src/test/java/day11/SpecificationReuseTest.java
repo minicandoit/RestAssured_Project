@@ -1,5 +1,6 @@
 package day11;
 
+import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
@@ -13,13 +14,17 @@ import static org.hamcrest.Matchers.*;
 
 public class SpecificationReuseTest extends SpartanWithAuthBaseTest {
 
-    private static RequestSpecification requestSpec = given()
+    private static RequestSpecification requestSpec = given().log().all()
                                                     .auth().basic("admin", "admin")
                                                     .accept(ContentType.JSON);
 
-    private static ResponseSpecification responseSpec = expect()
+    private static ResponseSpecification responseSpec = expect().logDetail(LogDetail.ALL)
                                                     .statusCode(200)
                                                     .contentType(ContentType.JSON);
+    // Adding the log in the expectation is different that the way we did elsewhere
+    // we use logDetail method that accept LogDetail enum (ALL , BODY, STATUS, HEADERS)
+
+
 
     // all test in this class class will use admin credentials
     // all tests in this class will expect json result from response
@@ -62,7 +67,7 @@ public class SpecificationReuseTest extends SpartanWithAuthBaseTest {
         when()
                 .get("/spartans/{id}").
         then()
-                .log().body()
+                //.log().body()
                 .spec(responseSpec)
 //                .statusCode(200)
 //                .contentType(ContentType.JSON)
