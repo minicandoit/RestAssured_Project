@@ -1,5 +1,6 @@
 package day11;
 
+import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,8 +20,9 @@ public class ReusableSpecLibraryAppTest extends LibraryAppBaseTest {
         when()
                 .get("/dashboard_stats")
         .then()
-                .statusCode(200)
-                .log().body()
+//                .statusCode(200)
+//                .log().body()
+             .spec(libraryResponseSpec)
         ;
     }
 
@@ -28,6 +30,13 @@ public class ReusableSpecLibraryAppTest extends LibraryAppBaseTest {
     @Test
     public void testGetAllUser(){
 
+        given()
+                .spec(librarianSpec).
+        when()
+                .get("/get_all_users").
+        then()
+                .spec(libraryResponseSpec)
+                ;
         // in class task
         // use the Reusable request specification
         // we build to send the request to get all users
