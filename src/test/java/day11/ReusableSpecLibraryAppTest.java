@@ -22,9 +22,28 @@ public class ReusableSpecLibraryAppTest extends LibraryAppBaseTest {
                 .statusCode(200)
                 .log().body()
         ;
+    }
+
+    @DisplayName("GET /get_all_users")
+    @Test
+    public void testGetAllUser(){
+
+        // in class task
+        // use the Reusable request specification
+        // we build to send the request to get all users
+
+        // build reusable Response specification
+        //  status code of 200
+        //  content type of json
+        //  and log all
+        // Add it to the BaseTest
+
+        // try reusing it in both of the tests in this class
+
 
 
     }
+
 
 
 
