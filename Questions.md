@@ -305,3 +305,11 @@ Not recently , Most of the API Endpoint I have worked on return Json response.
 I can work with XML Response using `XmlPath` in RestAssured
 
 
+## How to test api if it’s not created yet. Did you do it ? What tools did you use
+
+If API is not ready , It can be mocked to return some static response.  I have created mockserver according the details in the documentation to so I can keep writing my test and eventual replace the base url with real backend url to run the same tests against real backend. 
+
+Postman Mock Server Doc [here](https://learning.postman.com/docs/designing-and-developing-your-api/mocking-data/setting-up-mock/)
+
+
+
