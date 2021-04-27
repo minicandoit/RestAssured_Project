@@ -312,4 +312,20 @@ If API is not ready , It can be mocked to return some static response.  I have c
 Postman Mock Server Doc [here](https://learning.postman.com/docs/designing-and-developing-your-api/mocking-data/setting-up-mock/)
 
 
+## How do you handle data issue in your automation ? for example test failed due to data you used for test does not exists or data is not in correct state for the test run ? 
+
+For example in your `GET /api/spartans/{id}` request , tests are occaionally failing with `404` response. 
+
+It happen if the data does not exits
+This is not just for API , it also applys for UI tests that fails becausae of wrong or invalid data is passed to the test. 
+
+1. Use existing data 
+   1. You can send request to get all resources like by sending `GET /api/spartans` and grab one the valid ID to feed you test 
+   2. Run a query to get existing valid id using `JDBC`
+2. Create new data 
+   1. Send `POST` request to create new data and feed the `GET` request with new ID 
+   2. WORST CASE SCENARIO : insert data into database directly (HIGHLY NOT RECOMMENDED)
+
+
+
 
